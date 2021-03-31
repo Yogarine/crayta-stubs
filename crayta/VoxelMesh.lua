@@ -7,6 +7,7 @@
 --- entity variable is a Voxels type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class VoxelMesh : Entity
 --- @field public mesh      VoxelMeshAsset @Get or change the voxel mesh asset
@@ -30,16 +31,9 @@ local voxelMesh = {}
 VoxelMesh = voxelMesh
 
 ----
---- Client Revert a property that’s been changed on the client back to the server’s value for it.
+--- Change a single voxel in world space.
 ---
---- @param  propertyName  string
---- @return void
-----
-function voxelMesh:RevertClientProperty(propertyName)
-end
-
-----
---- Server Change a single voxel in world space.
+--- Server Only
 ---
 --- @param  pos         Vector
 --- @param  voxelAsset  VoxelAsset
@@ -49,18 +43,26 @@ function voxelMesh:SetVoxel(pos, voxelAsset)
 end
 
 ----
---- Server Change a cuboid of voxels with a given scale Vector.
+--- Change a cuboid of voxels with given dimensions in world units (centimeters).
+---
+--- 1 voxel = 25cm.
+--- 
+--- Server Only
 ---
 --- @param  pos         Vector
---- @param  scale       Vector
+--- @param  dimensions  Vector
 --- @param  voxelAsset  VoxelAsset
 --- @return void
 ----
-function voxelMesh:SetVoxelBox(pos, scale, voxelAsset)
+function voxelMesh:SetVoxelBox(pos, dimensions, voxelAsset)
 end
 
 ----
---- Server Change a cube of voxels given a given halfSize for each axis.
+--- Change a cube of voxels with a given half-size in world units (centimeters) for each axis.
+---
+--- 1 voxel = 25cm.
+--- 
+--- Server Only
 ---
 --- @param  pos         Vector
 --- @param  halfSize    number
@@ -71,18 +73,26 @@ function voxelMesh:SetVoxelBox(pos, halfSize, voxelAsset)
 end
 
 ----
---- Server Change an elipsoid of voxels with a given scale Vector.
+--- Change an elipsoid of voxels with given dimensions in world units (centimeters).
+---
+--- 1 voxel = 25cm.
+--- 
+--- Server Only
 ---
 --- @param  pos         Vector
---- @param  scale       Vector
+--- @param  dimensions  Vector
 --- @param  voxelAsset  VoxelAsset
 --- @return void
 ----
-function voxelMesh:SetVoxelSphere(pos, scale, voxelAsset)
+function voxelMesh:SetVoxelSphere(pos, dimensions, voxelAsset)
 end
 
 ----
---- Server Change a sphere of voxels with a given radius.
+--- Change a sphere of voxels with a given radius in world units (centimeters).
+---
+--- 1 voxel = 25cm.
+--- 
+--- Server Only
 ---
 --- @param  pos         Vector
 --- @param  radius      number
@@ -93,8 +103,10 @@ function voxelMesh:SetVoxelSphere(pos, radius, voxelAsset)
 end
 
 ----
---- Server Reset any SetVoxel…() calls that have been done during play, returning the voxel prop to
---- its starting state (ie as it was in the editor).
+--- Reset any SetVoxel...() calls that have been done during play, returning the voxel prop to its
+--- starting state (ie as it was in the editor).
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -102,7 +114,7 @@ function voxelMesh:ResetVoxels()
 end
 
 ----
---- Add a thruster to an entity.
+--- Add a thruster to an entity
 ---
 --- @return Thruster
 ----
@@ -111,7 +123,7 @@ function voxelMesh:CreateThruster()
 end
 
 ----
---- Add a thruster to an entity.
+--- Add a thruster to an entity
 ---
 --- @return Thruster
 ----
@@ -120,7 +132,7 @@ function voxelMesh:CreateRelativeThruster()
 end
 
 ----
---- Destroy a thruster.
+--- Destroy a thruster
 ---
 --- @param  handle  Thruster
 --- @return void

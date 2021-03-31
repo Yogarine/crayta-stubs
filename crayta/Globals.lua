@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------------------------------
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Globals
 --------------------------------------------------------------------------------------------------------
@@ -92,7 +93,14 @@ function FormatString(format, ...)
 end
 
 ----
---- Get the World object.
+--- @vararg any
+--- @return void
+----
+function ScreenPrint(...)
+end
+
+----
+--- Get the World object
 ---
 --- @return World
 ----
@@ -101,7 +109,7 @@ function GetWorld()
 end
 
 ----
---- Return true if this script is running on the client.
+--- Return true if this script is running on the client
 ---
 --- @return boolean
 ----
@@ -110,7 +118,7 @@ function IsClient()
 end
 
 ----
---- Return true if this script is running on the server.
+--- Return true if this script is running on the server
 ---
 --- @return boolean
 ----

@@ -1,25 +1,25 @@
 --------------------------------------------------------------------------------------------------------
---- Vector.
+--- Vector
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Vector
---- @field public x          number @X component of 3D vector
---- @field public y          number @Y component of 3D vector
---- @field public z          number @Z component of 3D vector
---- @field public operator +   void @Add two Vector values together and return a new Vector of the
----                                 result
---- @field public operator – void @Subtract two Vector values and return a new Vector of the result
---- @field public unary_minus  void @Negate a Vector value and return the result
---- @field public operator *   void 
---- @field public operator /   void 
---- @field public tostring   string @Convert to a string
+--- @field public x         number @X component of 3D vector
+--- @field public y         number @Y component of 3D vector
+--- @field public z         number @Z component of 3D vector
+--- @field public +       operator @Add two Vector values together and return a new Vector of the result
+--- @field public -       operator @Subtract two Vector values and return a new Vector of the result
+--- @field public unary_minus void @Negate a Vector value and return the result
+--- @field public *       operator 
+--- @field public /       operator 
+--- @field public tostring  string @Convert to a string
 --------------------------------------------------------------------------------------------------------
 local vec = {}
 Vector = vec
 
 ----
---- Zero vector (0, 0, 0).
+--- Zero vector (0, 0, 0)
 ---
 --- @type Vector
 ----
@@ -38,9 +38,7 @@ function Vector.New(x, y, z)
 end
 
 ----
---- Return a normalized Vector (where the length is 1.
----
---- 0)
+--- Return a normalized Vector (where the length is 1.0)
 ---
 --- @return Vector
 ----
@@ -112,7 +110,7 @@ end
 
 ----
 --- Linearly interpolate between vec1 and vec2 by the fraction alpha, where alpha is normally in the
---- range [0,1].
+--- range [0,1]
 ---
 --- @param  vec1   Vector
 --- @param  vec2   Vector

@@ -7,21 +7,12 @@
 --- Effect type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Effect : Entity
 --- @field public active     boolean @Set whether the particle system is emitting particles or not.
 --- @field public effect EffectAsset @EffectAsset on this entity
 --------------------------------------------------------------------------------------------------------
-local effect = {}
-Effect = effect
+local Effect = {}
 
-----
---- Client Revert a property that’s been changed on the client back to the server’s value for it.
----
---- @param  propertyName  string
---- @return void
-----
-function effect:RevertClientProperty(propertyName)
-end
-
-return effect
+return Effect

@@ -7,6 +7,7 @@
 --- type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Mesh : Entity
 --- @field public collisionEnabled boolean @Turn on or off collision (ie calling entry point
@@ -30,21 +31,22 @@ local mesh = {}
 Mesh = mesh
 
 ----
---- Client Revert a property that’s been changed on the client back to the server’s value for it.
----
---- @param  propertyName  string
---- @return void
-----
-function mesh:RevertClientProperty(propertyName)
-end
-
-----
 --- Play a named animation on this mesh, once.
 ---
 --- @param  animationName  string
 --- @return void
 ----
 function mesh:PlayAnimation(animationName)
+end
+
+----
+--- Play a named animation on this mesh, optionally looping.
+---
+--- @param  animationName  string
+--- @param  looping        boolean
+--- @return void
+----
+function mesh:PlayAnimation(animationName, looping)
 end
 
 ----
@@ -57,7 +59,7 @@ function mesh:PlayAnimationLooping(animationName)
 end
 
 ----
---- Play a named animation on this mesh, once, for this client only.
+--- Play a named animation on this mesh, once, for this client only
 ---
 --- @param  animationName  string
 --- @return void
@@ -66,7 +68,17 @@ function mesh:PlayAnimationClient(animationName)
 end
 
 ----
---- Play a named animation on this mesh, repeatedly, for this client only.
+--- Play a named animation on this mesh, optionally looping, for this client only
+---
+--- @param  animationName  string
+--- @param  looping        boolean
+--- @return void
+----
+function mesh:PlayAnimationClient(animationName, looping)
+end
+
+----
+--- Play a named animation on this mesh, repeatedly, for this client only
 ---
 --- @param  animationName  string
 --- @return void
@@ -84,7 +96,7 @@ function mesh:GetAnimationNames()
 end
 
 ----
---- Add a thruster to an entity.
+--- Add a thruster to an entity
 ---
 --- @return Thruster
 ----
@@ -100,7 +112,7 @@ function mesh:CreateRelativeThruster()
 end
 
 ----
---- Destroy a thruster.
+--- Destroy a thruster
 ---
 --- @param  handle  Thruster
 --- @return void

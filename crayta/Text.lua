@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------------------------------
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Text
 --- @field public tostring string @Note: tostring() will lose any non-ASCII characters from the local
@@ -39,13 +40,13 @@ function Text.Format(format, ...)
 end
 
 ----
---- Format a time into a Text value using the following expansions, {hh} – hour component of passed in
---- time, {mm} – minute component of passed in time, {ss} – seconds component of passed in time,
---- {ms} – milisecond component of passed in time.
+--- Format a time into a Text value using the following expansions, {hh} - hour component of passed in
+--- time, {mm} - minute component of passed in time, {ss} - seconds component of passed in time, {ms} -
+--- milisecond component of passed in time.
 ---
 --- If run on the client the format Text variable will be localized to the client language where
---- translations are available, if run on the server it won’t. (Note: Currently entering localised
---- text into text properties is not supported by the editor)
+--- translations are available, if run on the server it won't. (Note: Currently entering localised text
+--- into text properties is not supported by the editor)
 ---
 --- @param  time  number
 --- @return Text

@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------------------------------
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Event
 --- @field public tostring string 
@@ -23,8 +24,8 @@ function eventProperty:Listen(listenerScriptComponent, functionName)
 end
 
 ----
---- Return true if this Event is bound to anything, even if its something like “every instance of a
---- script” which would actually resolve to no bindings.
+--- Return true if this Event is bound to anything, even if its something like "every instance of a
+--- script" which would actually resolve to no bindings.
 ---
 --- @return boolean
 ----
@@ -33,8 +34,8 @@ function eventProperty:HasBindings()
 end
 
 ----
---- Get a table where each element is a table containing a ‘script’ variable and a ‘function’
---- variable, describing each call that is bound by this event.
+--- Get a table where each element is a table containing a 'script' variable and a 'function' variable,
+--- describing each call that is bound by this event.
 ---
 --- @return table
 ----

@@ -7,6 +7,7 @@
 --- particular entity variable is a Light type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Light : Entity
 --- @field public color        Color @Set color of light.
@@ -15,16 +16,6 @@
 --- @field public outerAngle  number @Set outer angle of a spot light (units?)
 --- @field public attenuation number @Set attenuation of the light (units?)
 --------------------------------------------------------------------------------------------------------
-local light = {}
-Light = light
+local Light = {}
 
-----
---- Client Revert a property that’s been changed on the client back to the server’s value for it.
----
---- @param  propertyName  string
---- @return void
-----
-function light:RevertClientProperty(propertyName)
-end
-
-return light
+return Light

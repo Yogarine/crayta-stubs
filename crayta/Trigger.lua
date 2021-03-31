@@ -6,6 +6,7 @@
 --- Trigger type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Trigger : Entity
 --- @field public playersOnly  boolean @Set whether the trigger should only overlap players or all
@@ -27,16 +28,7 @@ local triggerComponent = {}
 Trigger = triggerComponent
 
 ----
---- Client Revert a property that’s been changed on the client back to the server’s value for it.
----
---- @param  propertyName  string
---- @return void
-----
-function triggerComponent:RevertClientProperty(propertyName)
-end
-
-----
---- Returns whether a passed in entity is currently within the trigger.
+--- Returns whether a passed in entity is currently within the trigger
 ---
 --- @param  entity  Entity
 --- @return boolean
@@ -47,7 +39,7 @@ end
 
 ----
 --- Returns whether the point given (world space) is within the bounds of the trigger (whether the
---- trigger is active or not).
+--- trigger is active or not)
 ---
 --- @param  worldPosition  Vector
 --- @return boolean

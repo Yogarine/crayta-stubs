@@ -1,23 +1,24 @@
 --------------------------------------------------------------------------------------------------------
---- Vector2D.
+--- Vector2D
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Vector2D
---- @field public x          number @X component of 2D vector
---- @field public y          number @Y component of 2D vector
---- @field public operator +   void 
---- @field public operator – void 
---- @field public unary_minus  void 
---- @field public operator *   void 
---- @field public operator /   void 
---- @field public tostring   string 
+--- @field public x         number @X component of 2D vector
+--- @field public y         number @Y component of 2D vector
+--- @field public +       operator 
+--- @field public -       operator 
+--- @field public unary_minus void 
+--- @field public *       operator 
+--- @field public /       operator 
+--- @field public tostring  string 
 --------------------------------------------------------------------------------------------------------
 local vec = {}
 Vector2D = vec
 
 ----
---- Zero vector (0, 0).
+--- Zero vector (0, 0)
 ---
 --- @type Vector
 ----

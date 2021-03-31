@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------------------------------
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Analytics
 --------------------------------------------------------------------------------------------------------
@@ -59,8 +60,8 @@ end
 ----
 --- Send a MatchEnded event for later analysis.
 ---
---- Takes a table with an entry per user with a ‘user’ and ‘rank’ value (Note: Currently
---- specific telemetry analytics are not available to creators)
+--- Takes a table with an entry per user with a 'user' and 'rank' value (Note: Currently specific
+--- telemetry analytics are not available to creators)
 ---
 --- @param  matchHandle       Handle
 --- @param  userEntriesTable  table

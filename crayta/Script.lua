@@ -4,6 +4,7 @@
 --- Within a script function it is accessed through the self local variable.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Script<T : Entity>
 --- @field public properties  Properties 
@@ -13,11 +14,10 @@ local scriptComponent = {}
 Script = scriptComponent
 
 ----
---- Alternative to self.
+--- Alternative to self.properties, this gets the bag of values produced from the property editor for
+--- this script on this Entity.
 ---
---- properties, this gets the bag of values produced from the property editor for this script on this
---- Entity. The properties are defined by the static Properties table on the table returned by the Lua
---- script.
+--- The properties are defined by the static Properties table on the table returned by the Lua script.
 ---
 --- @return Properties
 ----
@@ -26,7 +26,7 @@ function scriptComponent:GetProperties()
 end
 
 ----
---- Client Revert a property that’s been changed on the client back to the server’s value for it.
+--- Revert a property that's been changed on the client back to the server's value for it
 ---
 --- @param  propertyName  string
 --- @return void
@@ -40,6 +40,15 @@ end
 --- @return T
 ----
 function scriptComponent:GetEntity()
+	return nil
+end
+
+----
+--- Returns the ScriptAsset this is an instance of.
+---
+--- @return ScriptAsset
+----
+function scriptComponent:GetScriptAsset()
 	return nil
 end
 
@@ -105,9 +114,11 @@ function scriptComponent:Cancel(handle)
 end
 
 ----
---- Server Set the save data for this script to the table supplied.
+--- Set the save data for this script to the table supplied.
 ---
 --- The script must be owned by a User or Player.
+--- 
+--- Server Only
 ---
 --- @param  saveTable  table
 --- @return void
@@ -116,15 +127,30 @@ function scriptComponent:SetSaveData(saveTable)
 end
 
 ----
---- Server Get the save data previously written out with SetSaveData on this script.
+--- Get the save data previously written out with SetSaveData on this script.
 ---
 --- This function is asynchronous and will call the callback function when its finished with the save
 --- data as an argument.
+--- 
+--- Server Only
 ---
 --- @param  callback  fun(saveData: table): void
 --- @return void
 ----
 function scriptComponent:GetSaveData(callback)
+end
+
+----
+--- Get the save data previously written out with SetSaveData on this script.
+---
+--- This function returns the save data immediately.
+--- 
+--- Server Only
+---
+--- @return table
+----
+function scriptComponent:GetSaveData()
+	return nil
 end
 
 ----
@@ -138,11 +164,12 @@ function scriptComponent:SendToScript(eventName, ...)
 end
 
 ----
---- Server Call eventName on this script on all clients currently connected to the server with the given
---- args.
+--- Call eventName on this script on all clients currently connected to the server with the given args.
 ---
 --- Note, this function call can not guarantee that entities are all in a ready state on the client at
 --- the time of call, and might therefore miss events during construction.
+--- 
+--- Server Only
 ---
 --- @param  eventName  string
 --- @vararg any
@@ -152,7 +179,9 @@ function scriptComponent:SendToAllClients(eventName, ...)
 end
 
 ----
---- Local Call eventName on this script on the server.
+--- Call eventName on this script on the server.
+---
+--- Local Only
 ---
 --- @param  eventName  string
 --- @vararg any
@@ -162,8 +191,9 @@ function scriptComponent:SendToServer(eventName, ...)
 end
 
 ----
---- Server Call eventName on this script on the client that owns the Player or User this script is
---- attached to.
+--- Call eventName on this script on the client that owns the Player or User this script is attached to.
+---
+--- Server Only
 ---
 --- @param  eventName  string
 --- @vararg any
@@ -173,7 +203,9 @@ function scriptComponent:SendToLocal(eventName, ...)
 end
 
 ----
---- Server Called when a player interacts with an entity on all scripts of the entity.
+--- Called when a player interacts with an entity on all scripts of the entity.
+---
+--- Server Only
 ---
 --- @param  player     Entity
 --- @param  hitResult  HitResult
@@ -183,9 +215,11 @@ function Script:OnInteract(player, hitResult)
 end
 
 ----
---- Server Called when a player collides with an entity on all scripts of the entity.
+--- Called when a player collides with an entity on all scripts of the entity.
 ---
---- Also calls this function on the player’s scripts with the entity as the argument.
+--- Also calls this function on the player's scripts with the entity as the argument.
+--- 
+--- Server Only
 ---
 --- @param  collidingPlayerOrEntity  Entity
 --- @return void
@@ -194,9 +228,11 @@ function Script:OnCollision(collidingPlayerOrEntity)
 end
 
 ----
---- Server Called when an entity is damaged on all scripts of the entity.
+--- Called when an entity is damaged on all scripts of the entity.
 ---
 --- TODO: work out what gets passed in here for radial damage instead of the HitResult.
+--- 
+--- Server Only
 ---
 --- @param  damageAmount  number
 --- @param  damageCauser  Entity
@@ -207,7 +243,9 @@ function Script:OnDamage(damageAmount, damageCauser, hitResult)
 end
 
 ----
---- Server Called to initialize a script on the server.
+--- Called to initialize a script on the server.
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -215,7 +253,7 @@ function Script:Init()
 end
 
 ----
---- Client Called to initialize a script on the client.
+--- Called to initialize a script on the client.
 ---
 --- @return void
 ----
@@ -223,8 +261,9 @@ function Script:ClientInit()
 end
 
 ----
---- Local Called to initialize a script on the client that controls this entity (eg player, user,
---- etc…).
+--- Called to initialize a script on the client that controls this entity (eg player, user, etc...)
+---
+--- Local Only
 ---
 --- @return void
 ----
@@ -232,7 +271,9 @@ function Script:LocalInit()
 end
 
 ----
---- Server Called each frame on the server.
+--- Called each frame on the server.
+---
+--- Server Only
 ---
 --- @param  deltaTimeSeconds  number
 --- @return void
@@ -241,7 +282,7 @@ function Script:OnTick(deltaTimeSeconds)
 end
 
 ----
---- Client Called each frame on the client.
+--- Called each frame on the client.
 ---
 --- @param  deltaTimeSeconds  number
 --- @return void
@@ -250,7 +291,9 @@ function Script:ClientOnTick(deltaTimeSeconds)
 end
 
 ----
---- Local Called each frame on the client that controls this entity (eg player, user, etc…).
+--- Called each frame on the client that controls this entity (eg player, user, etc...)
+---
+--- Local Only
 ---
 --- @param  deltaTimeSeconds  number
 --- @return void
@@ -259,7 +302,9 @@ function Script:LocalOnTick(deltaTimeSeconds)
 end
 
 ----
---- Server Called when a new user joins the game.
+--- Called when a new user joins the game.
+---
+--- Server Only
 ---
 --- @param  user  User
 --- @return void
@@ -268,7 +313,9 @@ function Script:OnUserLogin(user)
 end
 
 ----
---- Server Called when a new user leaves the game.
+--- Called when a new user leaves the game.
+---
+--- Server Only
 ---
 --- @param  user  User
 --- @return void
@@ -277,7 +324,9 @@ function Script:OnUserLogout(user)
 end
 
 ----
---- Server Called by the game on a Player when the Player is below the death plane setting.
+--- Called by the game on a Player when the Player is below the death plane setting
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -285,7 +334,9 @@ function Script:OnDeathPlaneTrigger()
 end
 
 ----
---- Server Called by a trigger component when an entity enters the trigger volume.
+--- Called by a trigger component when an entity enters the trigger volume
+---
+--- Server Only
 ---
 --- @param  other  Entity
 --- @return void
@@ -294,7 +345,9 @@ function Script:OnTriggerEnter(other)
 end
 
 ----
---- Server Called by a trigger component when an entity exits the trigger volume.
+--- Called by a trigger component when an entity exits the trigger volume
+---
+--- Server Only
 ---
 --- @param  other  Entity
 --- @return void
@@ -303,8 +356,10 @@ function Script:OnTriggerExit(other)
 end
 
 ----
---- Server Called on player and user scripts when a particular button is pressed, giving the string name
---- of the button.
+--- Called on player and user scripts when a particular button is pressed, giving the string name of the
+--- button
+---
+--- Server Only
 ---
 --- @param  buttonName  ButtonName
 --- @return void
@@ -313,8 +368,10 @@ function Script:OnButtonPressed(buttonName)
 end
 
 ----
---- Server Called on player and user scripts when a particular button is released, giving the string
---- name of the button.
+--- Called on player and user scripts when a particular button is released, giving the string name of
+--- the button
+---
+--- Server Only
 ---
 --- @param  buttonName  ButtonName
 --- @return void
@@ -323,7 +380,9 @@ function Script:OnButtonReleased(buttonName)
 end
 
 ----
---- Server Called when the character goes in to Iron Sight mode.
+--- Called when the character goes in to Iron Sight mode
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -331,7 +390,9 @@ function Script:OnIronSightStart()
 end
 
 ----
---- Server Called when the character stops Iron Sight mode.
+--- Called when the character stops Iron Sight mode
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -339,7 +400,9 @@ function Script:OnIronSightStop()
 end
 
 ----
---- Server Called when the character starts sprinting.
+--- Called when the character starts sprinting
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -347,7 +410,9 @@ function Script:OnSprintStart()
 end
 
 ----
---- Server Called when the character stops sprinting.
+--- Called when the character stops sprinting
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -355,7 +420,9 @@ function Script:OnSprintStop()
 end
 
 ----
---- Server Called when the character crouches.
+--- Called when the character crouches
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -363,7 +430,9 @@ function Script:OnCrouch()
 end
 
 ----
---- Server Called when the character stands from crouch.
+--- Called when the character stands from crouch
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -371,7 +440,9 @@ function Script:OnStand()
 end
 
 ----
---- Server Called on the player when a jump action happened.
+--- Called on the player when a jump action happened
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -379,8 +450,10 @@ function Script:OnJump()
 end
 
 ----
---- Local Called locally on player and user scripts when a particular button is pressed, giving the
---- string name of the button.
+--- Called locally on player and user scripts when a particular button is pressed, giving the string
+--- name of the button
+---
+--- Local Only
 ---
 --- @param  buttonName  ButtonName
 --- @return void
@@ -389,8 +462,10 @@ function Script:LocalOnButtonPressed(buttonName)
 end
 
 ----
---- Local Called locally on player and user scripts when a particular button is released, giving the
---- string name of the button.
+--- Called locally on player and user scripts when a particular button is released, giving the string
+--- name of the button
+---
+--- Local Only
 ---
 --- @param  buttonIndex  ButtonName
 --- @return void
@@ -399,7 +474,9 @@ function Script:LocalOnButtonReleased(buttonIndex)
 end
 
 ----
---- Local Called when the character goes in to Iron Sight mode.
+--- Called when the character goes in to Iron Sight mode
+---
+--- Local Only
 ---
 --- @return void
 ----
@@ -407,7 +484,9 @@ function Script:LocalOnIronSightStart()
 end
 
 ----
---- Local Called when the character stops Iron Sight mode.
+--- Called when the character stops Iron Sight mode
+---
+--- Local Only
 ---
 --- @return void
 ----
@@ -415,7 +494,9 @@ function Script:LocalOnIronSightStop()
 end
 
 ----
---- Local Called when the character starts sprinting.
+--- Called when the character starts sprinting
+---
+--- Local Only
 ---
 --- @return void
 ----
@@ -423,7 +504,9 @@ function Script:LocalOnSprintStart()
 end
 
 ----
---- Local Called when the character stops sprinting.
+--- Called when the character stops sprinting
+---
+--- Local Only
 ---
 --- @return void
 ----
@@ -431,7 +514,9 @@ function Script:LocalOnSprintStop()
 end
 
 ----
---- Local Called when the character crouches.
+--- Called when the character crouches
+---
+--- Local Only
 ---
 --- @return void
 ----
@@ -439,7 +524,9 @@ function Script:LocalOnCrouch()
 end
 
 ----
---- Local Called when the character stands from crouch.
+--- Called when the character stands from crouch
+---
+--- Local Only
 ---
 --- @return void
 ----
@@ -447,7 +534,9 @@ function Script:LocalOnStand()
 end
 
 ----
---- Local Called on the player when a jump action happened.
+--- Called on the player when a jump action happened
+---
+--- Local Only
 ---
 --- @return void
 ----
@@ -455,10 +544,12 @@ function Script:LocalOnJump()
 end
 
 ----
---- Server Called on server when the user’s hotbar index changes, either by using the previous and
---- next buttons or using the hotbar keys on a keyboard.
+--- Called on server when the user's hotbar index changes, either by using the previous and next buttons
+--- or using the hotbar keys on a keyboard.
 ---
 --- Calls function on all user and player scripts.
+--- 
+--- Server Only
 ---
 --- @param  hotbarIndex  number
 --- @return void
@@ -467,7 +558,7 @@ function Script:OnHotbarChanged(hotbarIndex)
 end
 
 ----
---- Called when a quick chat message is triggered by the user.
+--- Called when a quick chat message is triggered by the user
 ---
 --- @return void
 ----
@@ -475,15 +566,7 @@ function Script:OnChatMessage()
 end
 
 ----
---- Called when a challenge has updated.
----
---- @return void
-----
-function Script:OnChallengeUpdated()
-end
-
-----
---- Called on the server when an entity is destroyed.
+--- Called on the server when an entity is destroyed
 ---
 --- @return void
 ----
@@ -491,7 +574,7 @@ function Script:OnDestroy()
 end
 
 ----
---- Called when the character starts to mantle up to a platform.
+--- Called when the character starts to mantle up to a platform
 ---
 --- @return void
 ----
@@ -499,7 +582,7 @@ function Script:LocalOnMantleStart()
 end
 
 ----
---- Called when the character starts to mantle up to a platform.
+--- Called when the character starts to mantle up to a platform
 ---
 --- @return void
 ----
@@ -507,7 +590,7 @@ function Script:OnMantleStart()
 end
 
 ----
---- Called when the character stops to mantling up to a platform.
+--- Called when the character stops to mantling up to a platform
 ---
 --- @return void
 ----
@@ -515,7 +598,7 @@ function Script:LocalOnMantleStop()
 end
 
 ----
---- Called when the character stops to mantling up to a platform.
+--- Called when the character stops to mantling up to a platform
 ---
 --- @return void
 ----
@@ -523,7 +606,7 @@ function Script:OnMantleStop()
 end
 
 ----
---- Called when the character starts to slide.
+--- Called when the character starts to slide
 ---
 --- @return void
 ----
@@ -531,7 +614,7 @@ function Script:LocalOnSlideStart()
 end
 
 ----
---- Called when the character starts to slide.
+--- Called when the character starts to slide
 ---
 --- @return void
 ----
@@ -539,7 +622,7 @@ function Script:OnSlideStart()
 end
 
 ----
---- Called when the character stops sliding.
+--- Called when the character stops sliding
 ---
 --- @return void
 ----
@@ -547,7 +630,7 @@ function Script:LocalOnSlideStop()
 end
 
 ----
---- Called when the character stops sliding.
+--- Called when the character stops sliding
 ---
 --- @return void
 ----
@@ -555,7 +638,7 @@ function Script:OnSlideStop()
 end
 
 ----
---- Called when the character starts to roll.
+--- Called when the character starts to roll
 ---
 --- @return void
 ----
@@ -563,7 +646,7 @@ function Script:LocalOnRollStart()
 end
 
 ----
---- Called when the character starts to roll.
+--- Called when the character starts to roll
 ---
 --- @return void
 ----
@@ -571,7 +654,7 @@ function Script:OnRollStart()
 end
 
 ----
---- Called when the character stops rolling.
+--- Called when the character stops rolling
 ---
 --- @return void
 ----
@@ -579,7 +662,7 @@ function Script:LocalOnRollStop()
 end
 
 ----
---- Called when the character stops rolling.
+--- Called when the character stops rolling
 ---
 --- @return void
 ----

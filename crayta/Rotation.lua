@@ -1,19 +1,22 @@
 --------------------------------------------------------------------------------------------------------
---- Rotation.
+--- Rotation
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Rotation
---- @field public pitch      number @Pitch component of Rotation
---- @field public yaw        number @Yaw component of Rotation
---- @field public roll       number @Roll component of Rotation
---- @field public operator – void 
+--- @field public pitch number @Pitch component of Rotation
+--- @field public yaw   number @Yaw component of Rotation
+--- @field public roll  number @Roll component of Rotation
+--- @field public +   operator 
+--- @field public -   operator 
+--- @field public *   operator 
 --------------------------------------------------------------------------------------------------------
 local rotation = {}
 Rotation = rotation
 
 ----
---- Zero rotation on each axis (0, 0, 0).
+--- Zero rotation on each axis (0, 0, 0)
 ---
 --- @type Rotation
 ----
@@ -30,7 +33,7 @@ function Rotation.New(pitch, yaw, roll)
 end
 
 ----
---- Make a rotation from a vector.
+--- Make a rotation from a vector
 ---
 --- @param  vector  Vector
 --- @return Rotation
@@ -60,9 +63,7 @@ function rotation:RotateVector(vector)
 end
 
 ----
---- Unrotate a given vector by this rotation – the opposite of Rotation.
----
---- RotateVector.
+--- Unrotate a given vector by this rotation - the opposite of Rotation.RotateVector.
 ---
 --- @param  vector  Vector
 --- @return Vector

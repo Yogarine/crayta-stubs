@@ -2,11 +2,12 @@
 --- Functions that effect everything within the current world.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class World
---- @field public startTime               number @Start time of day from 0.0 (midnight) – 0.5 (midday)
----                                              – 1.0 (next midnight)
---- @field public dayLength               number @Length of virtual ‘day’ in real-time seconds
+--- @field public startTime               number @Start time of day from 0.0 (midnight) - 0.5 (midday) -
+---                                              1.0 (next midnight)
+--- @field public dayLength               number @Length of virtual 'day' in real-time seconds
 --- @field public sunDirection            number @Angle of sun in degrees. Controls whether the sun
 ---                                              rises from west to east, north to south, etc.
 --- @field public sunColor                 Color @Color of the sun
@@ -34,7 +35,7 @@ local world = {}
 World = world
 
 ----
---- Client Revert a property that’s been changed on the client back to the server’s value for it.
+--- Revert a property that's been changed on the client back to the server's value for it
 ---
 --- @param  propertyName  string
 --- @return void
@@ -167,7 +168,7 @@ function world:FindTemplate(name)
 end
 
 ----
---- Client Get the User that this client is owned by.
+--- Get the User that this client is owned by.
 ---
 --- @return User
 ----
@@ -188,7 +189,7 @@ function world:GetUsers()
 end
 
 ----
---- Call the given callback for each User with the User as the argument.
+--- Call the given callback for each User with the User as the argument
 ---
 --- @param  callback  fun(user: User, ...): void
 --- @vararg any
@@ -198,7 +199,9 @@ function world:ForEachUser(callback, ...)
 end
 
 ----
---- Server Applies point damage to the first Entity that intersects the given ray.
+--- Applies point damage to the first Entity that intersects the given ray.
+---
+--- Server Only
 ---
 --- @param  baseDamage  number
 --- @param  rayStart    Vector
@@ -210,13 +213,14 @@ function world:ApplyPointDamage(baseDamage, rayStart, direction, fromEntity)
 end
 
 ----
---- Server Applies point damage to the first Entity that intersects the given ray.
+--- Applies point damage to the first Entity that intersects the given ray.
 ---
 --- DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or
---- scripts that have voxel and damageMultiplier properties: { name = “voxel”, type =
---- “voxelasset” } and { name = “damageMultiplier”, type = “number” }. damageModifiers = { {
---- voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number },
---- script, script }
+--- scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and
+--- { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset,
+--- damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }
+--- 
+--- Server Only
 ---
 --- @param  baseDamage       number
 --- @param  rayStart         Vector
@@ -229,7 +233,9 @@ function world:ApplyPointDamage(baseDamage, rayStart, direction, fromEntity, dam
 end
 
 ----
---- Server Applies radial damage to all Entities within a radius of an origin.
+--- Applies radial damage to all Entities within a radius of an origin.
+---
+--- Server Only
 ---
 --- @param  baseDamage  number
 --- @param  origin      Vector
@@ -242,13 +248,14 @@ function world:ApplyRadialDamage(baseDamage, origin, radius, falloff, fromEntity
 end
 
 ----
---- Server Applies radial damage to all Entities within a radius of an origin.
+--- Applies radial damage to all Entities within a radius of an origin.
 ---
 --- DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or
---- scripts that have voxel and damageMultiplier properties: { name = “voxel”, type =
---- “voxelasset” } and { name = “damageMultiplier”, type = “number” }. damageModifiers = { {
---- voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number },
---- script, script }
+--- scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and
+--- { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset,
+--- damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }
+--- 
+--- Server Only
 ---
 --- @param  baseDamage       number
 --- @param  origin           Vector
@@ -265,12 +272,11 @@ end
 --- Set the voxel properties of the world.
 ---
 --- VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables,
---- and/or scripts that have voxel, and optionally health and healTime properties: { name = “voxel”,
---- type = “voxelasset” }, { name = “health”, type = “number”, default = 100 }, { name =
---- “healTime”, type = “number”, editor = “seconds”, default = 3 }. voxelProperties = { {
---- voxel = voxelasset, health = number, healTime = number }, { voxel = voxelasset, health = number }, {
---- voxel = voxelasset, healTime = number }, script, script } Defaults are 100 for health, 3.0 for heal
---- time.
+--- and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel",
+--- type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime",
+--- type = "number", editor = "seconds", default = 3 }. voxelProperties = { { voxel = voxelasset, health
+--- = number, healTime = number }, { voxel = voxelasset, health = number }, { voxel = voxelasset,
+--- healTime = number }, script, script } Defaults are 100 for health, 3.0 for heal time.
 ---
 --- @param  voxelPropertiesTable  table
 --- @return void
@@ -282,12 +288,12 @@ end
 --- Set the voxel properties of the world.
 ---
 --- VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables,
---- and/or scripts that have voxel, and optionally health and healTime properties: { name = “voxel”,
---- type = “voxelasset” }, { name = “health”, type = “number”, default = 100 }, { name =
---- “healTime”, type = “number”, editor = “seconds”, default = 3 }. voxelProperties = { {
---- voxel = voxelasset, health = number, healTime = number }, { voxel = voxelasset, health = number }, {
---- voxel = voxelasset, healTime = number }, script, script } Defaults are 100 for health, 3.0 for heal
---- time, these can be modified in this version of the function.
+--- and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel",
+--- type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime",
+--- type = "number", editor = "seconds", default = 3 }. voxelProperties = { { voxel = voxelasset, health
+--- = number, healTime = number }, { voxel = voxelasset, health = number }, { voxel = voxelasset,
+--- healTime = number }, script, script } Defaults are 100 for health, 3.0 for heal time, these can be
+--- modified in this version of the function.
 ---
 --- @param  voxelPropertiesTable  table
 --- @param  defaultMaxHealth      number
@@ -298,7 +304,7 @@ function world:SetVoxelProperties(voxelPropertiesTable, defaultMaxHealth, defaul
 end
 
 ----
---- Get the time of day (see SetTimeOfTime for what the return value means).
+--- Get the time of day (see SetTimeOfTime for what the return value means)
 ---
 --- @return number
 ----
@@ -307,8 +313,10 @@ function world:GetTimeOfDay()
 end
 
 ----
---- Server Spawn a new Entity from the template pointed at by templateAsset, at the given position and
+--- Spawn a new Entity from the template pointed at by templateAsset, at the given position and
 --- rotation.
+---
+--- Server Only
 ---
 --- @param  templateAsset  Template
 --- @param  position       Vector
@@ -320,8 +328,10 @@ function world:Spawn(templateAsset, position, rotation)
 end
 
 ----
---- Server Spawn a new Entity from the template pointed at by templateAsset, at the given locator’s
---- position and rotation.
+--- Spawn a new Entity from the template pointed at by templateAsset, at the given locator's position
+--- and rotation.
+---
+--- Server Only
 ---
 --- @param  templateAsset  Template
 --- @param  locatorEntity  Locator
@@ -345,7 +355,7 @@ function world:BroadcastToScripts(eventName, ...)
 end
 
 ----
---- Get server up time in seconds (can be called on client or server).
+--- Get server up time in seconds (can be called on client or server)
 ---
 --- @return number
 ----
@@ -382,7 +392,7 @@ end
 
 ----
 --- Gets the current active challenges Example result table: result = {} result[1] = {id = ChallengeId,
---- name = LocalisedName, icon = IconUrl, count = TotalCountToComplete} result[2] = {id….
+--- name = LocalisedName, icon = IconUrl, count = TotalCountToComplete} result[2] = {id...
 ---
 --- @return table
 ----

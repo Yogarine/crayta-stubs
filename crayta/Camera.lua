@@ -6,20 +6,11 @@
 --- Camera type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Camera : Entity
 --- @field public fov number @Field of view property of the camera
 --------------------------------------------------------------------------------------------------------
-local camera = {}
-Camera = camera
+local Camera = {}
 
-----
---- Client Revert a property that’s been changed on the client back to the server’s value for it.
----
---- @param  propertyName  string
---- @return void
-----
-function camera:RevertClientProperty(propertyName)
-end
-
-return camera
+return Camera

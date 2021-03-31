@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------------------------------
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Leaderboards
 --------------------------------------------------------------------------------------------------------
@@ -10,42 +11,55 @@ local Leaderboards = {}
 --- user where possible.
 ---
 --- Results are returned as a parameter to the callback function. Callback function parameter is a table
---- of results, each result contains name, score, rank & icon
+--- of results, each result contains name, score, rank  icon
 ---
---- @param  leaderboardName  string
---- @param  numValues        number
---- @param  user             User
---- @param  callback         fun(values: LeaderboardValue[]): void
+--- @param  leaderboardId  string
+--- @param  numValues      number
+--- @param  user           User
+--- @param  callback       fun(values: LeaderboardValue[]): void
 --- @return void
 ----
-function Leaderboards.GetNearbyValues(leaderboardName, numValues, user, callback)
+function Leaderboards.GetNearbyValues(leaderboardId, numValues, user, callback)
 end
 
 ----
 --- Gets the top ranking values from the specified leaderboard.
 ---
 --- Results are returned as a parameter to the callback function. Callback function parameter is a table
---- of results, each result contains name, score, rank & icon
+--- of results, each result contains name, score, rank  icon
 ---
---- @param  leaderboardName  string
---- @param  numValues        number
---- @param  callback         fun(values: LeaderboardValue[]): void
+--- @param  leaderboardId  string
+--- @param  numValues      number
+--- @param  callback       fun(values: LeaderboardValue[]): void
 --- @return void
 ----
-function Leaderboards.GetTopValues(leaderboardName, numValues, callback)
+function Leaderboards.GetTopValues(leaderboardId, numValues, callback)
+end
+
+----
+--- See Leaderboards.GetAllMetadata Gets the metadata of every leaderboard associated with this game.
+---
+--- Results are as a parameter to the callback function. Callback function parameter is a table of
+--- results, each result contains id, displayName, displayIndex, resetTime, isPeriodic, isAscending 
+--- scoreType.
+---
+--- @param  callback  fun(metadata: LeaderboardMetadata): void
+--- @return void
+----
+function Leaderboards.GetMetadata(callback)
 end
 
 ----
 --- Gets the metadata of a single named leaderboard for this game.
 ---
 --- Results are as a parameter to the callback function. Callback function parameter is a table
---- containing name, displayName, displayIndex, resetTime, isPeriodic, isAscending & type.
+--- containing id, displayName, displayIndex, resetTime, isPeriodic, isAscending  scoreType.
 ---
---- @param  leaderboardName  string
---- @param  callback         fun(metadata: LeaderboardMetadata): void
+--- @param  leaderboardId  string
+--- @param  callback       fun(metadata: LeaderboardMetadata): void
 --- @return void
 ----
-function Leaderboards.GetMetadata(leaderboardName, callback)
+function Leaderboards.GetMetadata(leaderboardId, callback)
 end
 
 ----
@@ -59,53 +73,68 @@ end
 --- Gets nearby leaderboard values for the specified GameId.
 ---
 --- Results are returned as a parameter to the callback function. Callback function parameter is a table
---- of results, each result contains name, score, rank & icon
+--- of results, each result contains name, score, rank  icon
 ---
---- @param  gameId           string
---- @param  leaderboardName  string
---- @param  numValues        number
---- @param  user             User
---- @param  callback         fun(values: LeaderboardValue[]): void
+--- @param  gameId         string
+--- @param  leaderboardId  string
+--- @param  numValues      number
+--- @param  user           User
+--- @param  callback       fun(values: LeaderboardValue[]): void
 --- @return void
 ----
-function Leaderboards.GetNearbyValuesForGame(gameId, leaderboardName, numValues, user, callback)
+function Leaderboards.GetNearbyValuesForGame(gameId, leaderboardId, numValues, user, callback)
 end
 
 ----
 --- Gets the top ranking values for the specified GameId Results are returned as a parameter to the
 --- callback function.
 ---
---- Callback function parameter is a table of results, each result contains name, score, rank & icon
+--- Callback function parameter is a table of results, each result contains name, score, rank  icon
 ---
---- @param  gameId           string
---- @param  leaderboardName  string
---- @param  numValues        number
---- @param  callback         fun(values: LeaderboardValue[]): void
+--- @param  gameId         string
+--- @param  leaderboardId  string
+--- @param  numValues      number
+--- @param  callback       fun(values: LeaderboardValue[]): void
 --- @return void
 ----
-function Leaderboards.GetTopValuesForGame(gameId, leaderboardName, numValues, callback)
+function Leaderboards.GetTopValuesForGame(gameId, leaderboardId, numValues, callback)
+end
+
+----
+--- See Leaderboards.GetAllMetadataForGame Gets the metadata of every leaderboard associated with the
+--- specified GameId.
+---
+--- Results are as a parameter to the callback function. Callback function parameter is a table of
+--- results, each result contains id, displayName, displayIndex, resetTime, isPeriodic, isAscending 
+--- scoreType.
+---
+--- @param  gameId    string
+--- @param  callback  fun(metadata: LeaderboardMetadata): void
+--- @return void
+----
+function Leaderboards.GetMetadataForGame(gameId, callback)
 end
 
 ----
 --- Gets the metadata of a single named leaderboard associated with the specified GameId.
 ---
 --- Results are as a parameter to the callback function. Callback function parameter is a table
---- containing name, displayName, displayIndex, resetTime, isPeriodic, isAscending & type.
+--- containing id, displayName, displayIndex, resetTime, isPeriodic, isAscending  scoreType.
 ---
---- @param  gameId           string
---- @param  leaderboardName  string
---- @param  callback         fun(metadata: LeaderboardMetadata): void
+--- @param  gameId         string
+--- @param  leaderboardId  string
+--- @param  callback       fun(metadata: LeaderboardMetadata): void
 --- @return void
 ----
-function Leaderboards.GetMetadataForGame(gameId, leaderboardName, callback)
+function Leaderboards.GetMetadataForGame(gameId, leaderboardId, callback)
 end
 
 ----
 --- Gets the metadata of every leaderboard associated with the specified GameId.
 ---
 --- Results are as a parameter to the callback function. Callback function parameter is a table of
---- results, each result contains name, displayName, displayIndex, resetTime, isPeriodic, isAscending &
---- type.
+--- results, each result contains id, displayName, displayIndex, resetTime, isPeriodic, isAscending 
+--- scoreType.
 ---
 --- @param  gameId    string
 --- @param  callback  fun(metadatas: LeaderboardMetadata[]): void

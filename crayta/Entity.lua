@@ -1,11 +1,11 @@
 --------------------------------------------------------------------------------------------------------
 --- Entity is a physical item in the world, viewable in the world tree when editing the game.
 ---
---- Entities contain any number of scripts and widgets, and can have a maximum of 1 “physical”
---- component (mesh, light). Additionally there are two special types that derive from Entity (Player
---- and User).
+--- Entities contain any number of scripts and widgets, and can have a maximum of 1 "physical" component
+--- (mesh, light). Additionally there are two special types that derive from Entity (Player and User).
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Entity
 --- @field public visible                    boolean @Set whether any physical aspect of the Entity
@@ -27,7 +27,7 @@
 ---                                                  entity.theHud returns a widget named theHud,
 ---                                                  entity.mesh returns the Mesh of this Entity,
 ---                                                  entity.light returns the property bag for a light
----                                                  component…
+---                                                  component...
 --------------------------------------------------------------------------------------------------------
 local entity = {}
 Entity = entity
@@ -57,7 +57,16 @@ function entity:GetName()
 end
 
 ----
---- Client Revert a property that’s been changed on the client back to the server’s value for it.
+--- Get the World from an Entity (currently all entities in a game exist within the same World).
+---
+--- @return World
+----
+function entity:GetWorld()
+	return nil
+end
+
+----
+--- Revert a property that's been changed on the client back to the server's value for it
 ---
 --- @param  propertyName  string
 --- @return void
@@ -282,6 +291,21 @@ function entity:PlaySound(sound, fadeIn)
 end
 
 ----
+--- Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound.
+---
+--- Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the
+--- given fadeIn time.
+---
+--- @param  sound      SoundAsset
+--- @param  fadeIn     number
+--- @param  groupName  string
+--- @return Handle
+----
+function entity:PlaySound(sound, fadeIn, groupName)
+	return nil
+end
+
+----
 --- Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds,
 --- stereo music stings, etc).
 ---
@@ -307,6 +331,22 @@ function entity:PlaySound2D(sound, fadeIn)
 end
 
 ----
+--- Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds,
+--- stereo music stings, etc).
+---
+--- Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the
+--- given fadeIn time.
+---
+--- @param  sound      SoundAsset
+--- @param  fadeIn     number
+--- @param  groupName  string
+--- @return Handle
+----
+function entity:PlaySound2D(sound, fadeIn, groupName)
+	return nil
+end
+
+----
 --- Play a sound Asset on this Entity at the given location.
 ---
 --- @param  location  Vector
@@ -328,6 +368,22 @@ end
 --- @return Handle
 ----
 function entity:PlaySoundAtLocation(location, sound, fadeIn)
+	return nil
+end
+
+----
+--- Play a sound Asset on this Entity at the given location.
+---
+--- Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the
+--- given fadeIn time.
+---
+--- @param  location   Vector
+--- @param  sound      SoundAsset
+--- @param  fadeIn     number
+--- @param  groupName  string
+--- @return Handle
+----
+function entity:PlaySoundAtLocation(location, sound, fadeIn, groupName)
 	return nil
 end
 
@@ -414,7 +470,9 @@ function entity:StopEffect(effectHandle)
 end
 
 ----
---- Server Clone the Entity returning the clone.
+--- Clone the Entity returning the clone.
+---
+--- Server Only
 ---
 --- @return Entity
 ----
@@ -423,7 +481,9 @@ function entity:Clone()
 end
 
 ----
---- Server Attach this Entity to another Entity.
+--- Attach this Entity to another Entity
+---
+--- Server Only
 ---
 --- @param  entityToAttachTo  Entity
 --- @return void
@@ -432,7 +492,9 @@ function entity:AttachTo(entityToAttachTo)
 end
 
 ----
---- Server Attach this Entity to a Character entity, using the named socket.
+--- Attach this Entity to a Character entity, using the named socket
+---
+--- Server Only
 ---
 --- @param  characterToAttachTo  Character
 --- @param  socketName           string
@@ -467,10 +529,9 @@ end
 --- fromEntity which will be passed to the OnDamage function.
 ---
 --- DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or
---- scripts that have voxel and damageMultiplier properties: { name = “voxel”, type =
---- “voxelasset” } and { name = “damageMultiplier”, type = “number” }. damageModifiers = { {
---- voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number },
---- script, script }
+--- scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and
+--- { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset,
+--- damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }
 ---
 --- @param  damageAmount     number
 --- @param  hitResult        HitResult
@@ -501,10 +562,9 @@ end
 --- function.
 ---
 --- DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or
---- scripts that have voxel and damageMultiplier properties: { name = “voxel”, type =
---- “voxelasset” } and { name = “damageMultiplier”, type = “number” }. damageModifiers = { {
---- voxel = voxelasset, damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number },
---- script, script }
+--- scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and
+--- { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset,
+--- damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }
 ---
 --- @param  damageAmount     number
 --- @param  shootDirection   Vector
@@ -537,9 +597,11 @@ function entity:GetChildren()
 end
 
 ----
---- Server Destroy an Entity.
+--- Destroy an Entity.
 ---
 --- Use with care as any variables referencing that Entity will now be invalid.
+--- 
+--- Server Only
 ---
 --- @return void
 ----
@@ -559,8 +621,10 @@ function entity:SendToScripts(eventName, ...)
 end
 
 ----
---- Server Call eventName on all scripts of this Entity on all clients connected to the server with the
---- given args.
+--- Call eventName on all scripts of this Entity on all clients connected to the server with the given
+--- args.
+---
+--- Server Only
 ---
 --- @param  eventName  string
 --- @vararg any
@@ -570,7 +634,9 @@ function entity:SendToAllClients(eventName, ...)
 end
 
 ----
---- Local Call eventName on all script of this Entity on the server.
+--- Call eventName on all script of this Entity on the server.
+---
+--- Local Only
 ---
 --- @param  eventName  string
 --- @vararg any
@@ -580,8 +646,10 @@ function entity:SendToServer(eventName, ...)
 end
 
 ----
---- Server Call eventName on all scripts of this Entity on the client that owns the Player or User this
---- script is attached to.
+--- Call eventName on all scripts of this Entity on the client that owns the Player or User this script
+--- is attached to.
+---
+--- Server Only
 ---
 --- @param  eventName  string
 --- @vararg any
@@ -591,7 +659,9 @@ function entity:SendToLocal(eventName, ...)
 end
 
 ----
---- Local See if this Entity is owned by the local client.
+--- See if this Entity is owned by the local client.
+---
+--- Local Only
 ---
 --- @return boolean
 ----
@@ -600,9 +670,16 @@ function entity:IsLocal()
 end
 
 ----
---- This is alternative to entity.
+--- Check if this Entity is on the client
 ---
---- scriptName which is the preferred way of getting a script.
+--- @return boolean
+----
+function entity:IsClient()
+	return nil
+end
+
+----
+--- This is alternative to entity.scriptName which is the preferred way of getting a script.
 ---
 --- @param  scriptName  string
 --- @return Script<Entity>
@@ -612,10 +689,9 @@ function entity:FindScript(scriptName)
 end
 
 ----
---- This is alternative to entity.
+--- This is alternative to entity.scriptName which is the preferred way of getting a script.
 ---
---- scriptName which is the preferred way of getting a script. This can be recursive to find the script
---- on any child entities.
+--- This can be recursive to find the script on any child entities.
 ---
 --- @param  scriptName  string
 --- @param  recursive   boolean
@@ -649,7 +725,7 @@ function entity:FindScript(templateRefScript, recursive)
 end
 
 ----
---- Find a script with the named property on it and return value from the property.
+--- Find a script with the named property on it and return value from the property
 ---
 --- @param  propertyName  string
 --- @return table
@@ -683,9 +759,35 @@ function entity:FindAllScripts(templateRefScript)
 end
 
 ----
---- This is alternative to entity.
+--- Find all scripts named scriptName on this entity (and optionally recursively on all child entities
+--- if recursive flag is set).
 ---
---- widgetName which is the preferred way of getting a widget.
+--- Most often used where multiple scripts are used to simulate an array of structures.
+---
+--- @param  scriptName  string
+--- @param  recursive   boolean
+--- @return table
+----
+function entity:FindAllScripts(scriptName, recursive)
+	return nil
+end
+
+----
+--- Find all scripts of the given script asset on this entity (and optionally recursively on all child
+--- entities if recursive flag is set).
+---
+--- Most often used where multiple scripts are used to simulate an array of structures.
+---
+--- @param  templateRefScript  ScriptAsset
+--- @param  recursive          boolean
+--- @return table
+----
+function entity:FindAllScripts(templateRefScript, recursive)
+	return nil
+end
+
+----
+--- This is alternative to entity.widgetName which is the preferred way of getting a widget.
 ---
 --- @param  widgetName  string
 --- @return Widget
@@ -695,10 +797,9 @@ function entity:FindWidget(widgetName)
 end
 
 ----
---- This is alternative to entity.
+--- This is alternative to entity.widgetName which is the preferred way of getting a widget.
 ---
---- widgetName which is the preferred way of getting a widget. This can be recursive to find the widget
---- on any child entities.
+--- This can be recursive to find the widget on any child entities.
 ---
 --- @param  widgetName  string
 --- @param  recursive   boolean
@@ -732,8 +833,10 @@ function entity:FindWidget(widget, recursive)
 end
 
 ----
---- Server When called with an Entity that is owned by a particular client this sees if that Entity has
---- been inited on that client (by calling LocalInit).
+--- When called with an Entity that is owned by a particular client this sees if that Entity has been
+--- inited on that client (by calling LocalInit).
+---
+--- Server Only
 ---
 --- @return boolean
 ----
@@ -742,11 +845,24 @@ function entity:IsLocalReady()
 end
 
 ----
+--- Send an type of telemetry event to the telemetry server with the given parametersTable for later
+--- analysis.
+---
+--- Deprecated and will be removed - see Analytics.SendTelemetry
+---
+--- @param  type             string
+--- @param  parametersTable  table
+--- @return void
+----
+function entity:SendTelemetry(type, parametersTable)
+end
+
+----
 --- Play a timeline from an array of values.
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from “EaseIn”, EaseOut”, “EaseInOut”, “Linear” (default)
+--- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
 ---
 --- @param  timelineArray  table
 --- @return number
@@ -760,7 +876,7 @@ end
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from “EaseIn”, EaseOut”, “EaseInOut”, “Linear” (default)
+--- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
 ---
 --- @vararg any
 --- @return number
@@ -774,7 +890,7 @@ end
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from “EaseIn”, EaseOut”, “EaseInOut”, “Linear” (default)
+--- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
 ---
 --- @param  timelineArray  table
 --- @return void
@@ -787,7 +903,7 @@ end
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from “EaseIn”, EaseOut”, “EaseInOut”, “Linear” (default)
+--- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
 ---
 --- @vararg any
 --- @return void
@@ -800,7 +916,7 @@ end
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from “EaseIn”, EaseOut”, “EaseInOut”, “Linear” (default)
+--- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
 ---
 --- @param  timelineArray  table
 --- @return void
@@ -813,7 +929,7 @@ end
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from “EaseIn”, EaseOut”, “EaseInOut”, “Linear” (default)
+--- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
 ---
 --- @vararg any
 --- @return void
@@ -822,11 +938,11 @@ function entity:PlayTimelinePingPong(...)
 end
 
 ----
---- Play a timeline, relative to an entity’s parent transform, from an array of values.
+--- Play a timeline, relative to an entity's parent transform, from an array of values.
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from “EaseIn”, EaseOut”, “EaseInOut”, “Linear” (default)
+--- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
 ---
 --- @param  timelineArray  table
 --- @return number
@@ -836,11 +952,11 @@ function entity:PlayRelativeTimeline(timelineArray)
 end
 
 ----
---- Play a timeline, relative to an entity’s parent transform, from variable args.
+--- Play a timeline, relative to an entity's parent transform, from variable args.
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from “EaseIn”, EaseOut”, “EaseInOut”, “Linear” (default)
+--- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
 ---
 --- @vararg any
 --- @return number
@@ -850,11 +966,11 @@ function entity:PlayRelativeTimeline(...)
 end
 
 ----
---- Loop a timeline, relative to an entity’s parent transform, from an array of values.
+--- Loop a timeline, relative to an entity's parent transform, from an array of values.
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from “EaseIn”, EaseOut”, “EaseInOut”, “Linear” (default)
+--- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
 ---
 --- @param  timelineArray  table
 --- @return number
@@ -864,11 +980,11 @@ function entity:PlayRelativeTimelineLoop(timelineArray)
 end
 
 ----
---- Loop a timeline, relative to an entity’s parent transform, from variable args.
+--- Loop a timeline, relative to an entity's parent transform, from variable args.
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from “EaseIn”, EaseOut”, “EaseInOut”, “Linear” (default)
+--- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
 ---
 --- @vararg any
 --- @return number
@@ -878,11 +994,11 @@ function entity:PlayRelativeTimelineLoop(...)
 end
 
 ----
---- Loop a timeline back and forth, relative to an entity’s parent transform.
+--- Loop a timeline back and forth, relative to an entity's parent transform.
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from “EaseIn”, EaseOut”, “EaseInOut”, “Linear” (default)
+--- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
 ---
 --- @param  timelineArray  table
 --- @return number
@@ -892,11 +1008,11 @@ function entity:PlayRelativeTimelinePingPong(timelineArray)
 end
 
 ----
---- Loop a timeline back and forth, relative to an entity’s parent transform, from variable args.
+--- Loop a timeline back and forth, relative to an entity's parent transform, from variable args.
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from “EaseIn”, EaseOut”, “EaseInOut”, “Linear” (default)
+--- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
 ---
 --- @vararg any
 --- @return number
@@ -906,7 +1022,7 @@ function entity:PlayRelativeTimelinePingPong(...)
 end
 
 ----
---- Cancel any running timeline.
+--- Cancel any running timeline
 ---
 --- @return void
 ----
@@ -916,7 +1032,7 @@ end
 ----
 --- Given an entity, get the Template it is an instance of (if there is one).
 ---
---- Warning – this will return the template even if lots of things have been adjusted on the instance.
+--- Warning - this will return the template even if lots of things have been adjusted on the instance.
 ---
 --- @return Template
 ----

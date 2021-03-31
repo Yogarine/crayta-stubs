@@ -6,6 +6,7 @@
 --- Entity. You can do entity:IsA(Sound) to see if a particular entity variable is a Sound type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Sound : Entity
 --- @field public active   boolean @Set whether the sound is playing or not.
@@ -14,16 +15,6 @@
 --- @field public pitch     number @Set the pitch of the sound (1 = Default pitch, 0.125 = 8 times
 ---                                slower, 2 = 2 times faster)
 --------------------------------------------------------------------------------------------------------
-local sound = {}
-Sound = sound
+local Sound = {}
 
-----
---- Client Revert a property that’s been changed on the client back to the server’s value for it.
----
---- @param  propertyName  string
---- @return void
-----
-function sound:RevertClientProperty(propertyName)
-end
-
-return sound
+return Sound

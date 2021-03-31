@@ -3,6 +3,7 @@
 --- (GetPosition) and what the normal vector of the collision is (GetNormal).
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class HitResult
 --------------------------------------------------------------------------------------------------------
@@ -10,7 +11,7 @@ local hitResult = {}
 HitResult = hitResult
 
 ----
---- Get position of hit in world space.
+--- Get position of hit in world space
 ---
 --- @return Vector
 ----
@@ -19,7 +20,7 @@ function hitResult:GetPosition()
 end
 
 ----
---- Get position of hit relative to the Entity hit.
+--- Get position of hit relative to the Entity hit
 ---
 --- @return Vector
 ----
@@ -28,7 +29,7 @@ function hitResult:GetRelativePosition()
 end
 
 ----
---- Get normal direction of hit in world space.
+--- Get normal direction of hit in world space
 ---
 --- @return Vector
 ----
@@ -37,7 +38,7 @@ function hitResult:GetNormal()
 end
 
 ----
---- Get normal direction of the hit relative to the rotation of the Entity hit.
+--- Get normal direction of the hit relative to the rotation of the Entity hit
 ---
 --- @return Vector
 ----

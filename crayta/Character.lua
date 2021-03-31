@@ -8,6 +8,7 @@
 --- Character type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
+--- @version 0.6.106.99988
 ---
 --- @class Character : Entity
 --- @field public speedMultiplier              number @Multiplier on movement speed (default is 1.0)
@@ -35,10 +36,10 @@
 ---                                                   Sight mode
 --- @field public cameraDistance               number @Set the orbit camera max distance from the
 ---                                                   character
---- @field public cameraPitch                  number @Set the orbit camera’s pitch
---- @field public cameraYaw                    number @Set the orbit camera’s yaw
+--- @field public cameraPitch                  number @Set the orbit camera's pitch
+--- @field public cameraYaw                    number @Set the orbit camera's yaw
 --- @field public cameraLock                  boolean @Lock/Unlock the orbit camera
---- @field public cameraCollisionEnabled      boolean @Enable/Disable the camera’s collision
+--- @field public cameraCollisionEnabled      boolean @Enable/Disable the camera's collision
 --- @field public damageEnabled               boolean @Turn on or off damage (ie calling of entry point
 ---                                                   OnDamaged).
 --------------------------------------------------------------------------------------------------------
@@ -46,16 +47,20 @@ local character = {}
 Character = character
 
 ----
---- Client Revert a property that’s been changed on the client back to the server’s value for it.
+--- Attach an entity to this character using the given socketName (this is deprecated and will be
+--- removed, do entity:AttachTo(characterToAttachTo, socketName))
 ---
---- @param  propertyName  string
+--- Server Only
+---
+--- @param  entityToAttach  Entity
+--- @param  socketName      string
 --- @return void
 ----
-function character:RevertClientProperty(propertyName)
+function characterToAttachTo:Attach(entityToAttach, socketName)
 end
 
 ----
---- Get the User entity which controls this Character.
+--- Get the User entity which controls this Character
 ---
 --- @return User
 ----
@@ -64,7 +69,9 @@ function character:GetUser()
 end
 
 ----
---- Server For a Player set it to be alive (true) or dead (false).
+--- For a Player set it to be alive (true) or dead (false).
+---
+--- Server Only
 ---
 --- @param  alive  boolean
 --- @return void
@@ -84,8 +91,10 @@ function character:IsAlive()
 end
 
 ----
---- Server Local Get the point the player is looking at, for an action camera this is the same as
---- User:GetCameraLookAtPos but for orbit style cameras it will be in front of the player.
+--- Get the point the player is looking at, for an action camera this is the same as
+--- User:GetCameraLookAtPos but for orbit style cameras it will be in front of the player
+---
+--- Server Only, Local Only
 ---
 --- @return Vector
 ----
@@ -94,11 +103,13 @@ function character:GetLookAtPos()
 end
 
 ----
---- Server Local Return two values, the position of the player’s virtual “eye” and the position
---- the player is looking at.
+--- Return two values, the position of the player's virtual "eye" and the position the player is looking
+--- at.
 ---
 --- For an action camera this is the same as User:GetCameraLookAt but for an orbit style camera it will
---- be the player’s head position and what is in front of the player.
+--- be the player's head position and what is in front of the player.
+--- 
+--- Server Only, Local Only
 ---
 --- @return Vector,Vector
 ----
@@ -107,7 +118,9 @@ function character:GetLookAt()
 end
 
 ----
---- Server Local Lock player control.
+--- Lock player control
+---
+--- Server Only, Local Only
 ---
 --- @param  inputLocked  boolean
 --- @return void
@@ -127,7 +140,7 @@ function character:SetGrip(gripPresetAsset)
 end
 
 ----
---- Reverts the player back to the default ‘unarmed’ animations.
+--- Reverts the player back to the default 'unarmed' animations.
 ---
 --- Can also be achieved by calling SetGrip(nil)
 ---
@@ -137,7 +150,7 @@ function character:SetNoGrip()
 end
 
 ----
---- Play an animation action, with properties specifying how it should be played.
+--- Play an animation action, with properties specifying how it should be played
 ---
 --- @overload fun(actionName: "Melee",  properties: AnimationProperties<MeleeAnimationEvents>)
 --- @overload fun(actionName: "Reload",  properties: AnimationProperties<ReloadAnimationEvents>)
@@ -149,7 +162,7 @@ function character:PlayAction(actionName, properties)
 end
 
 ----
---- Play an animation action with default properties.
+--- Play an animation action with default properties
 ---
 --- @param  actionName  string
 --- @return void
@@ -158,7 +171,7 @@ function character:PlayAction(actionName)
 end
 
 ----
---- Returns true if the current grip can perform this type of action.
+--- Returns true if the current grip can perform this type of action
 ---
 --- @param  actionName  string
 --- @return boolean
@@ -168,7 +181,7 @@ function character:HasAction(actionName)
 end
 
 ----
---- Get the name of every available action for this grip type.
+--- Get the name of every available action for this grip type
 ---
 --- @return table
 ----
@@ -177,7 +190,7 @@ function character:GetActions()
 end
 
 ----
---- Get the name of every event available event for an action.
+--- Get the name of every event available event for an action
 ---
 --- @param  actionName  string
 --- @return table
@@ -187,7 +200,7 @@ function character:GetActionEvents(actionName)
 end
 
 ----
---- Returns true if this action has an animation event of the specified name.
+--- Returns true if this action has an animation event of the specified name
 ---
 --- @param  actionName  string
 --- @param  eventName   string
@@ -198,7 +211,7 @@ function character:HasActionEvent(actionName, eventName)
 end
 
 ----
---- Returns the length of an animation, in seconds, assuming a playbackSpeed of 1 is set.
+--- Returns the length of an animation, in seconds, assuming a playbackSpeed of 1 is set
 ---
 --- @param  actionName  string
 --- @return number
@@ -208,7 +221,7 @@ function character:GetPlayLength(actionName)
 end
 
 ----
---- Launch the character.
+--- Launch the character
 ---
 --- @param  impulse  Vector
 --- @return void
@@ -217,7 +230,9 @@ function character:Launch(impulse)
 end
 
 ----
---- Server Local Get whichever Entity you would interact with if you pressed interact.
+--- Get whichever Entity you would interact with if you pressed interact
+---
+--- Server Only, Local Only
 ---
 --- @return Entity,HitResult
 ----
