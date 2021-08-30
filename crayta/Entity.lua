@@ -89,23 +89,12 @@ end
 ----
 --- Move from current to position over time.
 ---
+--- @overload fun(fromPosition: Vector, toPosition: Vector, time: number): number
 --- @param  position  Vector
 --- @param  time      number
 --- @return number
 ----
 function entity:AlterPosition(position, time)
-	return nil
-end
-
-----
---- Move from fromPosition to toPosition over time.
----
---- @param  fromPosition  Vector
---- @param  toPosition    Vector
---- @param  time          number
---- @return number
-----
-function entity:AlterPosition(fromPosition, toPosition, time)
 	return nil
 end
 
@@ -130,23 +119,12 @@ end
 ----
 --- Rotate from current to rotation over time.
 ---
+--- @overload fun(fromRotation: Rotation, toRotation: Rotation, time: number): number
 --- @param  rotation  Rotation
 --- @param  time      number
 --- @return number
 ----
 function entity:AlterRotation(rotation, time)
-	return nil
-end
-
-----
---- Rotate from fromRotation to toRotation over time.
----
---- @param  fromRotation  Rotation
---- @param  toRotation    Rotation
---- @param  time          number
---- @return number
-----
-function entity:AlterRotation(fromRotation, toRotation, time)
 	return nil
 end
 
@@ -171,23 +149,12 @@ end
 ----
 --- Move from current to position over time relative to whatever this entity is parented to.
 ---
+--- @overload fun(fromPosition: Vector, toPosition: Vector, time: number): number
 --- @param  position  Vector
 --- @param  time      number
 --- @return number
 ----
 function entity:AlterRelativePosition(position, time)
-	return nil
-end
-
-----
---- Move from fromPosition to toPosition over time relative to whatever this entity is parented to.
----
---- @param  fromPosition  Vector
---- @param  toPosition    Vector
---- @param  time          number
---- @return number
-----
-function entity:AlterRelativePosition(fromPosition, toPosition, time)
 	return nil
 end
 
@@ -212,23 +179,12 @@ end
 ----
 --- Rotate from current to rotation over time relative to whatever this entity is parented to.
 ---
+--- @overload fun(fromRotation: Rotation, toRotation: Rotation, time: number): number
 --- @param  rotation  Rotation
 --- @param  time      number
 --- @return number
 ----
 function entity:AlterRelativeRotation(rotation, time)
-	return nil
-end
-
-----
---- Rotate from fromRotation to toRotation over time relative to whatever this entity is parented to.
----
---- @param  fromRotation  Rotation
---- @param  toRotation    Rotation
---- @param  time          number
---- @return number
-----
-function entity:AlterRelativeRotation(fromRotation, toRotation, time)
 	return nil
 end
 
@@ -253,6 +209,7 @@ end
 ----
 --- Set the rotation of an Entity to make its front face in a given direction.
 ---
+--- @overload fun(forward: Vector, up: Vector): void
 --- @param  forward  Vector
 --- @return void
 ----
@@ -260,19 +217,10 @@ function entity:SetForward(forward)
 end
 
 ----
---- Set the rotation of an Entity to make its front face in a given direction, and its top point in
---- another.
----
---- @param  forward  Vector
---- @param  up       Vector
---- @return void
-----
-function entity:SetForward(forward, up)
-end
-
-----
 --- Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound.
 ---
+--- @overload fun(sound: SoundAsset, fadeIn: number): Handle
+--- @overload fun(sound: SoundAsset, fadeIn: number, groupName: string): Handle
 --- @param  sound  SoundAsset
 --- @return Handle
 ----
@@ -281,37 +229,11 @@ function entity:PlaySound(sound)
 end
 
 ----
---- Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound.
----
---- Fades in over the given fadeIn time.
----
---- @param  sound   SoundAsset
---- @param  fadeIn  number
---- @return Handle
-----
-function entity:PlaySound(sound, fadeIn)
-	return nil
-end
-
-----
---- Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound.
----
---- Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the
---- given fadeIn time.
----
---- @param  sound      SoundAsset
---- @param  fadeIn     number
---- @param  groupName  string
---- @return Handle
-----
-function entity:PlaySound(sound, fadeIn, groupName)
-	return nil
-end
-
-----
 --- Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds,
 --- stereo music stings, etc).
 ---
+--- @overload fun(sound: SoundAsset, fadeIn: number): Handle
+--- @overload fun(sound: SoundAsset, fadeIn: number, groupName: string): Handle
 --- @param  sound  SoundAsset
 --- @return Handle
 ----
@@ -320,38 +242,10 @@ function entity:PlaySound2D(sound)
 end
 
 ----
---- Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds,
---- stereo music stings, etc).
----
---- Fades in over the given fadeIn time.
----
---- @param  sound   SoundAsset
---- @param  fadeIn  number
---- @return Handle
-----
-function entity:PlaySound2D(sound, fadeIn)
-	return nil
-end
-
-----
---- Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds,
---- stereo music stings, etc).
----
---- Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the
---- given fadeIn time.
----
---- @param  sound      SoundAsset
---- @param  fadeIn     number
---- @param  groupName  string
---- @return Handle
-----
-function entity:PlaySound2D(sound, fadeIn, groupName)
-	return nil
-end
-
-----
 --- Play a sound Asset on this Entity at the given location.
 ---
+--- @overload fun(location: Vector, sound: SoundAsset, fadeIn: number): Handle
+--- @overload fun(location: Vector, sound: SoundAsset, fadeIn: number, groupName: string): Handle
 --- @param  location  Vector
 --- @param  sound     SoundAsset
 --- @return Handle
@@ -361,38 +255,9 @@ function entity:PlaySoundAtLocation(location, sound)
 end
 
 ----
---- Play a sound Asset on this Entity at the given location.
----
---- Fades in over the given fadeIn time.
----
---- @param  location  Vector
---- @param  sound     SoundAsset
---- @param  fadeIn    number
---- @return Handle
-----
-function entity:PlaySoundAtLocation(location, sound, fadeIn)
-	return nil
-end
-
-----
---- Play a sound Asset on this Entity at the given location.
----
---- Fades in over the given fadeIn time. Fades out any sound already playing in the GroupName with the
---- given fadeIn time.
----
---- @param  location   Vector
---- @param  sound      SoundAsset
---- @param  fadeIn     number
---- @param  groupName  string
---- @return Handle
-----
-function entity:PlaySoundAtLocation(location, sound, fadeIn, groupName)
-	return nil
-end
-
-----
 --- Given a sound Handle stop the sound on this Entity.
 ---
+--- @overload fun(soundHandle: Handle, fadeOut: number): void
 --- @param  soundHandle  Handle
 --- @return void
 ----
@@ -400,21 +265,10 @@ function entity:StopSound(soundHandle)
 end
 
 ----
---- Given a sound Handle stop the sound on this Entity.
----
---- Fade the sound out over the given fadeOut time.
----
---- @param  soundHandle  Handle
---- @param  fadeOut      number
---- @return void
-----
-function entity:StopSound(soundHandle, fadeOut)
-end
-
-----
 --- Play a particle effect Asset on this Entity, returning a Handle which can be used to stop the
 --- effect.
 ---
+--- @overload fun(effect: EffectAsset, attached: boolean): Handle
 --- @param  effect  EffectAsset
 --- @return Handle
 ----
@@ -423,45 +277,16 @@ function entity:PlayEffect(effect)
 end
 
 ----
---- Play a particle effect Asset on this Entity, returning a Handle which can be used to stop the
---- effect.
----
---- Optionally the effect is attached to the entity and so all spawned particles are relative to it.
----
---- @param  effect    EffectAsset
---- @param  attached  boolean
---- @return Handle
-----
-function entity:PlayEffect(effect, attached)
-	return nil
-end
-
-----
 --- Play a particle effect Asset at a given world location and rotation, returning a Handle which can be
 --- used to stop the effect.
 ---
+--- @overload fun(location: Vector, rotation: Rotation, effect: EffectAsset, attached: boolean): Handle
 --- @param  location  Vector
 --- @param  rotation  Rotation
 --- @param  effect    EffectAsset
 --- @return Handle
 ----
 function entity:PlayEffectAtLocation(location, rotation, effect)
-	return nil
-end
-
-----
---- Play a particle effect Asset at a given world location and rotation, returning a Handle which can be
---- used to stop the effect.
----
---- Optionally the effect is attached to the entity and so all spawned particles are relative to it.
----
---- @param  location  Vector
---- @param  rotation  Rotation
---- @param  effect    EffectAsset
---- @param  attached  boolean
---- @return Handle
-----
-function entity:PlayEffectAtLocation(location, rotation, effect, attached)
 	return nil
 end
 
@@ -488,22 +313,11 @@ end
 ---
 --- Server Only
 ---
+--- @overload fun(characterToAttachTo: Character, socketName: string): void
 --- @param  entityToAttachTo  Entity
 --- @return void
 ----
 function entity:AttachTo(entityToAttachTo)
-end
-
-----
---- Attach this Entity to a Character entity, using the named socket
----
---- Server Only
----
---- @param  characterToAttachTo  Character
---- @param  socketName           string
---- @return void
-----
-function entity:AttachTo(characterToAttachTo, socketName)
 end
 
 ----
@@ -517,6 +331,9 @@ end
 --- that), also pass a HitResult from a World Raycast function and a shootDirection Vector and
 --- fromEntity which will be passed to the OnDamage function.
 ---
+--- @overload fun(damageAmount: number, hitResult: HitResult, shootDirection: Vector, fromEntity: Entity, damageModifiers: table): void
+--- @overload fun(damageAmount: number, shootDirection: Vector, fromEntity: Entity): void
+--- @overload fun(damageAmount: number, shootDirection: Vector, fromEntity: Entity, damageModifiers: table): void
 --- @param  damageAmount    number
 --- @param  hitResult       HitResult
 --- @param  shootDirection  Vector
@@ -524,62 +341,6 @@ end
 --- @return void
 ----
 function entity:ApplyDamage(damageAmount, hitResult, shootDirection, fromEntity)
-end
-
-----
---- Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override
---- that), also pass a HitResult from a World Raycast function and a shootDirection Vector and
---- fromEntity which will be passed to the OnDamage function.
----
---- DamageModifiers is a table of { voxel = <voxelasset>, damageMultiplier = <number> } tables, and/or
---- scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and
---- { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel =
---- <voxelasset>, damageMultiplier = <number> },                      { voxel = <voxelasset>,
---- damageMultiplier = <number> },                      <script>,                      <script>         
----          }
----
---- @param  damageAmount     number
---- @param  hitResult        HitResult
---- @param  shootDirection   Vector
---- @param  fromEntity       Entity
---- @param  damageModifiers  table
---- @return void
-----
-function entity:ApplyDamage(damageAmount, hitResult, shootDirection, fromEntity, damageModifiers)
-end
-
-----
---- Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override
---- that), also pass a shootDirection Vector and fromEntity which will be passed to the OnDamage
---- function.
----
---- @param  damageAmount    number
---- @param  shootDirection  Vector
---- @param  fromEntity      Entity
---- @return void
-----
-function entity:ApplyDamage(damageAmount, shootDirection, fromEntity)
-end
-
-----
---- Apply damageAmount damage to the Entity (by calling OnDamage on it on any scripts that override
---- that), also pass a shootDirection Vector and fromEntity which will be passed to the OnDamage
---- function.
----
---- DamageModifiers is a table of { voxel = <voxelasset>, damageMultiplier = <number> } tables, and/or
---- scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and
---- { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel =
---- <voxelasset>, damageMultiplier = <number> },                      { voxel = <voxelasset>,
---- damageMultiplier = <number> },                      <script>,                      <script>         
----          }
----
---- @param  damageAmount     number
---- @param  shootDirection   Vector
---- @param  fromEntity       Entity
---- @param  damageModifiers  table
---- @return void
-----
-function entity:ApplyDamage(damageAmount, shootDirection, fromEntity, damageModifiers)
 end
 
 ----
@@ -688,46 +449,13 @@ end
 ----
 --- This is alternative to entity.scriptName which is the preferred way of getting a script.
 ---
+--- @overload fun(scriptName: string, recursive: boolean): Script<Entity>
+--- @overload fun(templateRefScript: ScriptAsset): Script<Entity>
+--- @overload fun(templateRefScript: ScriptAsset, recursive: boolean): Script<Entity>
 --- @param  scriptName  string
 --- @return Script<Entity>
 ----
 function entity:FindScript(scriptName)
-	return nil
-end
-
-----
---- This is alternative to entity.scriptName which is the preferred way of getting a script.
----
---- This can be recursive to find the script on any child entities.
----
---- @param  scriptName  string
---- @param  recursive   boolean
---- @return Script<Entity>
-----
-function entity:FindScript(scriptName, recursive)
-	return nil
-end
-
-----
---- Find a script by its script asset.
----
---- @param  templateRefScript  ScriptAsset
---- @return Script<Entity>
-----
-function entity:FindScript(templateRefScript)
-	return nil
-end
-
-----
---- Find a script by its script asset.
----
---- This can be recursive to find the script on any child entities.
----
---- @param  templateRefScript  ScriptAsset
---- @param  recursive          boolean
---- @return Script<Entity>
-----
-function entity:FindScript(templateRefScript, recursive)
 	return nil
 end
 
@@ -746,6 +474,9 @@ end
 ---
 --- Most often used where multiple scripts are used to simulate an array of structures.
 ---
+--- @overload fun(templateRefScript: ScriptAsset): Script<Entity>[]
+--- @overload fun(scriptName: string, recursive: boolean): Script<Entity>[]
+--- @overload fun(templateRefScript: ScriptAsset, recursive: boolean): Script<Entity>[]
 --- @param  scriptName  string
 --- @return Script<Entity>[]
 ----
@@ -754,88 +485,15 @@ function entity:FindAllScripts(scriptName)
 end
 
 ----
---- Find all scripts of the given script asset recursively on this entity and all child entities.
----
---- Most often used where multiple scripts are used to simulate an array of structures.
----
---- @param  templateRefScript  ScriptAsset
---- @return Script<Entity>[]
-----
-function entity:FindAllScripts(templateRefScript)
-	return {}
-end
-
-----
---- Find all scripts named scriptName on this entity (and optionally recursively on all child entities
---- if recursive flag is set).
----
---- Most often used where multiple scripts are used to simulate an array of structures.
----
---- @param  scriptName  string
---- @param  recursive   boolean
---- @return Script<Entity>[]
-----
-function entity:FindAllScripts(scriptName, recursive)
-	return {}
-end
-
-----
---- Find all scripts of the given script asset on this entity (and optionally recursively on all child
---- entities if recursive flag is set).
----
---- Most often used where multiple scripts are used to simulate an array of structures.
----
---- @param  templateRefScript  ScriptAsset
---- @param  recursive          boolean
---- @return Script<Entity>[]
-----
-function entity:FindAllScripts(templateRefScript, recursive)
-	return {}
-end
-
-----
 --- This is alternative to entity.widgetName which is the preferred way of getting a widget.
 ---
+--- @overload fun(widgetName: string, recursive: boolean): Widget
+--- @overload fun(widget: WidgetAsset): Widget
+--- @overload fun(widget: WidgetAsset, recursive: boolean): Widget
 --- @param  widgetName  string
 --- @return Widget
 ----
 function entity:FindWidget(widgetName)
-	return nil
-end
-
-----
---- This is alternative to entity.widgetName which is the preferred way of getting a widget.
----
---- This can be recursive to find the widget on any child entities.
----
---- @param  widgetName  string
---- @param  recursive   boolean
---- @return Widget
-----
-function entity:FindWidget(widgetName, recursive)
-	return nil
-end
-
-----
---- Find a widget by its widget asset.
----
---- @param  widget  WidgetAsset
---- @return Widget
-----
-function entity:FindWidget(widget)
-	return nil
-end
-
-----
---- Find a widget by its widget asset.
----
---- This can be recursive to find the widget on any child entities.
----
---- @param  widget     WidgetAsset
---- @param  recursive  boolean
---- @return Widget
-----
-function entity:FindWidget(widget, recursive)
 	return nil
 end
 

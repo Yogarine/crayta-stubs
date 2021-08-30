@@ -50,6 +50,7 @@ end
 --- Pass an entityToIgnore to tell it not to hit that one (for example ignore the player when doing a
 --- ray from a gun the player is holding).
 ---
+--- @overload fun(startPosition: Vector, endPosition: Vector, entitiesToIgnoreTable: Entity[], collisionCallback: fun(entity: Entity, hitResult: HitResult): void): void
 --- @param  startPosition      Vector
 --- @param  endPosition        Vector
 --- @param  entityToIgnore     Entity
@@ -57,21 +58,6 @@ end
 --- @return void
 ----
 function world:Raycast(startPosition, endPosition, entityToIgnore, collisionCallback)
-end
-
-----
---- Send a ray (line) from start position to end position, and call the collisionCallback with the
---- entity that was hit and a HitResult structure if any Entity is hit along the way.
----
---- Pass an array of entities to ignore.
----
---- @param  startPosition          Vector
---- @param  endPosition            Vector
---- @param  entitiesToIgnoreTable  table
---- @param  collisionCallback      fun(entity: Entity, hitResult: HitResult): void
---- @return void
-----
-function world:Raycast(startPosition, endPosition, entitiesToIgnoreTable, collisionCallback)
 end
 
 ----
@@ -91,21 +77,10 @@ end
 ---
 --- Can be very slow.
 ---
+--- @overload fun(derivedType: table): table
 --- @return table
 ----
 function world:FindAll()
-	return nil
-end
-
-----
---- Return all entities in the world of the given type (Light, Mesh, etc).
----
---- Can be very slow.
----
---- @param  derivedType  table
---- @return table
-----
-function world:FindAll(derivedType)
 	return nil
 end
 
@@ -114,6 +89,7 @@ end
 ---
 --- Most often used where multiple scripts are used to simulate an array of structures.
 ---
+--- @overload fun(templateRefScript: ScriptAsset): Script<Entity>[]
 --- @param  scriptName  string
 --- @return Script<Entity>[]
 ----
@@ -122,36 +98,14 @@ function world:FindAllScripts(scriptName)
 end
 
 ----
---- Find all scripts matching the script asset recursively in the world.
----
---- Most often used where multiple scripts are used to simulate an array of structures.
----
---- @param  templateRefScript  ScriptAsset
---- @return Script<Entity>[]
-----
-function world:FindAllScripts(templateRefScript)
-	return {}
-end
-
-----
 --- Find any entity with a script named scriptName recursively in the world, returns the script if
 --- found.
 ---
+--- @overload fun(templateRefScript: ScriptAsset): Script<Entity>
 --- @param  scriptName  string
 --- @return Script<Entity>
 ----
 function world:FindScript(scriptName)
-	return nil
-end
-
-----
---- Find any entity with a script matching the script asset recursively in the world, returns the script
---- if found.
----
---- @param  templateRefScript  ScriptAsset
---- @return Script<Entity>
-----
-function world:FindScript(templateRefScript)
 	return nil
 end
 
@@ -203,6 +157,7 @@ end
 ---
 --- Server Only
 ---
+--- @overload fun(baseDamage: number, rayStart: Vector, direction: Vector, fromEntity: Entity, damageModifiers: table): void
 --- @param  baseDamage  number
 --- @param  rayStart    Vector
 --- @param  direction   Vector
@@ -213,31 +168,11 @@ function world:ApplyPointDamage(baseDamage, rayStart, direction, fromEntity)
 end
 
 ----
---- Applies point damage to the first Entity that intersects the given ray.
----
---- DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or
---- scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and
---- { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel =
---- voxelasset, damageMultiplier = number },                      { voxel = voxelasset, damageMultiplier
---- = number },                      script,                      script                   }
---- 
---- Server Only
----
---- @param  baseDamage       number
---- @param  rayStart         Vector
---- @param  direction        Vector
---- @param  fromEntity       Entity
---- @param  damageModifiers  table
---- @return void
-----
-function world:ApplyPointDamage(baseDamage, rayStart, direction, fromEntity, damageModifiers)
-end
-
-----
 --- Applies radial damage to all Entities within a radius of an origin.
 ---
 --- Server Only
 ---
+--- @overload fun(baseDamage: number, origin: Vector, radius: number, falloff: number, fromEntity: Entity, damageModifiers: table): void
 --- @param  baseDamage  number
 --- @param  origin      Vector
 --- @param  radius      number
@@ -246,28 +181,6 @@ end
 --- @return void
 ----
 function world:ApplyRadialDamage(baseDamage, origin, radius, falloff, fromEntity)
-end
-
-----
---- Applies radial damage to all Entities within a radius of an origin.
----
---- DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or
---- scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and
---- { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel =
---- voxelasset, damageMultiplier = number },                      { voxel = voxelasset, damageMultiplier
---- = number },                      script,                      script                   }
---- 
---- Server Only
----
---- @param  baseDamage       number
---- @param  origin           Vector
---- @param  radius           number
---- @param  falloff          number
---- @param  fromEntity       Entity
---- @param  damageModifiers  table
---- @return void
-----
-function world:ApplyRadialDamage(baseDamage, origin, radius, falloff, fromEntity, damageModifiers)
 end
 
 ----
@@ -282,30 +195,11 @@ end
 ---    script,                      script                   } Defaults are 100 for health, 3.0 for heal
 --- time.
 ---
+--- @overload fun(voxelPropertiesTable: table, defaultMaxHealth: number, defaultHealTime: number): void
 --- @param  voxelPropertiesTable  table
 --- @return void
 ----
 function world:SetVoxelProperties(voxelPropertiesTable)
-end
-
-----
---- Set the voxel properties of the world.
----
---- VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables,
---- and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel",
---- type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime",
---- type = "number", editor = "seconds", default = 3 }. voxelProperties = {                      { voxel
---- = voxelasset, health = number, healTime = number },                      { voxel = voxelasset,
---- health = number },                      { voxel = voxelasset, healTime = number },                  
----    script,                      script                   } Defaults are 100 for health, 3.0 for heal
---- time, these can be modified in this version of the function.
----
---- @param  voxelPropertiesTable  table
---- @param  defaultMaxHealth      number
---- @param  defaultHealTime       number
---- @return void
-----
-function world:SetVoxelProperties(voxelPropertiesTable, defaultMaxHealth, defaultHealTime)
 end
 
 ----
@@ -323,26 +217,13 @@ end
 ---
 --- Server Only
 ---
+--- @overload fun(templateAsset: Template, locatorEntity: Locator): Entity
 --- @param  templateAsset  Template
 --- @param  position       Vector
 --- @param  rotation       Rotation
 --- @return Entity
 ----
 function world:Spawn(templateAsset, position, rotation)
-	return nil
-end
-
-----
---- Spawn a new Entity from the template pointed at by templateAsset, at the given locator's position
---- and rotation.
----
---- Server Only
----
---- @param  templateAsset  Template
---- @param  locatorEntity  Locator
---- @return Entity
-----
-function world:Spawn(templateAsset, locatorEntity)
 	return nil
 end
 
@@ -380,19 +261,12 @@ function world:GetUTCTime()
 end
 
 ----
+--- @overload fun(railNamesTable: table, callback: fun(games: string[]): void): void
 --- @param  railName  string
 --- @param  callback  fun(games: string[]): void
 --- @return void
 ----
 function world:GetGames(railName, callback)
-end
-
-----
---- @param  railNamesTable  table
---- @param  callback        fun(games: string[]): void
---- @return void
-----
-function world:GetGames(railNamesTable, callback)
 end
 
 ----

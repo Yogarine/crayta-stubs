@@ -154,20 +154,12 @@ end
 ---
 --- @overload fun(actionName: "Melee",  properties: AnimationProperties<MeleeAnimationEvents>)
 --- @overload fun(actionName: "Reload",  properties: AnimationProperties<ReloadAnimationEvents>)
+--- @overload fun(actionName: string): void
 --- @param  actionName  string
 --- @param  properties  table
 --- @return void
 ----
 function character:PlayAction(actionName, properties)
-end
-
-----
---- Play an animation action with default properties
----
---- @param  actionName  string
---- @return void
-----
-function character:PlayAction(actionName)
 end
 
 ----

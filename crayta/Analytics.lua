@@ -12,25 +12,13 @@ local Analytics = {}
 ---
 --- (Note: Currently specific telemetry analytics are not available to creators)
 ---
+--- @overload fun(type: string, parametersTable: table): void
 --- @param  entity           Entity
 --- @param  type             string
 --- @param  parametersTable  table
 --- @return void
 ----
 function Analytics.SendTelemetry(entity, type, parametersTable)
-end
-
-----
---- Send an type of telemetry event to the telemetry server with the given parametersTable for later
---- analysis.
----
---- (Note: Currently specific telemetry analytics are not available to creators)
----
---- @param  type             string
---- @param  parametersTable  table
---- @return void
-----
-function Analytics.SendTelemetry(type, parametersTable)
 end
 
 ----
@@ -51,6 +39,7 @@ end
 ---
 --- (Note: Currently specific telemetry analytics are not available to creators)
 ---
+--- @overload fun(matchHandle: Handle, userEntriesTable: table): void
 --- @param  matchHandle  Handle
 --- @return void
 ----
@@ -58,45 +47,18 @@ function Analytics.MatchEnded(matchHandle)
 end
 
 ----
---- Send a MatchEnded event for later analysis.
----
---- Takes a table with an entry per user with a 'user' and 'rank' value (Note: Currently specific
---- telemetry analytics are not available to creators)
----
---- @param  matchHandle       Handle
---- @param  userEntriesTable  table
---- @return void
-----
-function Analytics.MatchEnded(matchHandle, userEntriesTable)
-end
-
-----
 --- Send an Attacked event for later analysis.
 ---
 --- When an attack entity attack another victim entity. Should be recorded when an attack makes contact
 --- or impacts a player or entity. (Note: Currently specific telemetry analytics are not available to
 --- creators)
 ---
+--- @overload fun(attacker: Entity, victim: Entity, weapon: Entity): void
 --- @param  attacker  Entity
 --- @param  victim    Entity
 --- @return void
 ----
 function Analytics.Attacked(attacker, victim)
-end
-
-----
---- Send an Attacked event for later analysis.
----
---- When an attack entity attack another victim entity. Should be recorded when an attack makes contact
---- or impacts a player or entity. (Note: Currently specific telemetry analytics are not available to
---- creators)
----
---- @param  attacker  Entity
---- @param  victim    Entity
---- @param  weapon    Entity
---- @return void
-----
-function Analytics.Attacked(attacker, victim, weapon)
 end
 
 ----
