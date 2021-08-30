@@ -31,27 +31,13 @@ end
 --- 
 --- Server Only
 ---
+--- @overload fun(counterName: string, increment: number): void
 --- @param  counterName  string
 --- @param  increment    number
 --- @param  callback     fun(count: number): void
 --- @return void
 ----
 function GameStorage.UpdateCounter(counterName, increment, callback)
-end
-
-----
---- Update the value of a global counter for this game by adding increment to the existing value.
----
---- Global counters are shared between all servers running the game and saved between sessions. Global
---- counters are always whole (integer) numbers.
---- 
---- Server Only
----
---- @param  counterName  string
---- @param  increment    number
---- @return void
-----
-function GameStorage.UpdateCounter(counterName, increment)
 end
 
 return GameStorage

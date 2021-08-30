@@ -42,6 +42,8 @@ end
 ---
 --- Server Only
 ---
+--- @overload fun(playerTemplate: Template, locatorEntity: Locator): Character
+--- @overload fun(playerTemplate: Template, position: Vector, rotation: Rotation): Character
 --- @param  playerTemplate  Template
 --- @return Character
 ----
@@ -50,119 +52,21 @@ function user:SpawnPlayer(playerTemplate)
 end
 
 ----
---- Spawn a player Entity for this User using the supplied template asset, at the position and rotation
---- of the locatorEntity.
----
---- Server Only
----
---- @param  playerTemplate  Template
---- @param  locatorEntity   Locator
---- @return Character
-----
-function user:SpawnPlayer(playerTemplate, locatorEntity)
-	return nil
-end
-
-----
---- Spawn a player Entity for this User using the supplied template asset, at the given position and
---- rotation.
----
---- Server Only
----
---- @param  playerTemplate  Template
---- @param  position        Vector
---- @param  rotation        Rotation
---- @return Character
-----
-function user:SpawnPlayer(playerTemplate, position, rotation)
-	return nil
-end
-
-----
 --- Spawn a player Entity for this User using the supplied template asset and trigger the spawn effect
 --- with callback
 ---
 --- Server Only
 ---
+--- @overload fun(playerTemplate: Template, locatorEntity: Locator, onEffectEnded: fun(): void): Character
+--- @overload fun(playerTemplate: Template, position: Vector, rotation: Rotation, onEffectEnded: fun(): void): Character
+--- @overload fun(playerTemplate: Template): Character
+--- @overload fun(playerTemplate: Template, locatorEntity: Locator): Character
+--- @overload fun(playerTemplate: Template, position: Vector, rotation: Rotation): Character
 --- @param  playerTemplate  Template
 --- @param  onEffectEnded   fun(): void
 --- @return Character
 ----
 function user:SpawnPlayerWithEffect(playerTemplate, onEffectEnded)
-	return nil
-end
-
-----
---- Spawn a player Entity for this User using the supplied template asset, at the position of the
---- spawnPoint (which can be any Entity with a 'playerstart' component) and trigger the spawn effect
---- with callback
----
---- Server Only
----
---- @param  playerTemplate  Template
---- @param  locatorEntity   Locator
---- @param  onEffectEnded   fun(): void
---- @return Character
-----
-function user:SpawnPlayerWithEffect(playerTemplate, locatorEntity, onEffectEnded)
-	return nil
-end
-
-----
---- Spawn a player Entity for this User using the supplied template asset, at the given position and
---- trigger the spawn effect
----
---- Server Only
----
---- @param  playerTemplate  Template
---- @param  position        Vector
---- @param  rotation        Rotation
---- @param  onEffectEnded   fun(): void
---- @return Character
-----
-function user:SpawnPlayerWithEffect(playerTemplate, position, rotation, onEffectEnded)
-	return nil
-end
-
-----
---- Spawn a player Entity for this User using the supplied template asset and trigger the spawn effect
---- with callback
----
---- Server Only
----
---- @param  playerTemplate  Template
---- @return Character
-----
-function user:SpawnPlayerWithEffect(playerTemplate)
-	return nil
-end
-
-----
---- Spawn a player Entity for this User using the supplied template asset, at the position of the
---- spawnPoint (which can be any Entity with a 'playerstart' component) and trigger the spawn effect.
----
---- Server Only
----
---- @param  playerTemplate  Template
---- @param  locatorEntity   Locator
---- @return Character
-----
-function user:SpawnPlayerWithEffect(playerTemplate, locatorEntity)
-	return nil
-end
-
-----
---- Spawn a player Entity for this User using the supplied template asset, at the given position and
---- trigger the spawn effect
----
---- Server Only
----
---- @param  playerTemplate  Template
---- @param  position        Vector
---- @param  rotation        Rotation
---- @return Character
-----
-function user:SpawnPlayerWithEffect(playerTemplate, position, rotation)
 	return nil
 end
 
@@ -181,20 +85,11 @@ end
 ---
 --- Server Only
 ---
+--- @overload fun(): void
 --- @param  onEffectEnded  fun(): void
 --- @return void
 ----
 function user:DespawnPlayerWithEffect(onEffectEnded)
-end
-
-----
---- Despawn a player and trigger the despawn effect
----
---- Server Only
----
---- @return void
-----
-function user:DespawnPlayerWithEffect()
 end
 
 ----
@@ -214,25 +109,11 @@ end
 ---
 --- Server Only
 ---
+--- @overload fun(cameraEntity: Entity, transitionTime: number): void
 --- @param  cameraEntity  Entity
 --- @return void
 ----
 function user:SetCamera(cameraEntity)
-end
-
-----
---- Set camera view of this User to the given cameraEntity (which can be either a Camera entity or a
---- Character entity).
----
---- Transitions the camera over a given time from the previous one.
---- 
---- Server Only
----
---- @param  cameraEntity    Entity
---- @param  transitionTime  number
---- @return void
-----
-function user:SetCamera(cameraEntity, transitionTime)
 end
 
 ----
@@ -264,23 +145,16 @@ end
 ----
 --- Server Only, Local Only
 ---
+--- @overload fun(travelFailedCallback: fun(): void): void
 --- @return void
 ----
 function user:LeaveGame()
 end
 
 ----
---- Server Only
----
---- @param  travelFailedCallback  fun(): void
---- @return void
-----
-function user:LeaveGame(travelFailedCallback)
-end
-
-----
 --- Server Only, Local Only
 ---
+--- @overload fun(gameId: string, travelFailedCallback: fun(): void): void
 --- @param  gameId  string
 --- @return void
 ----
@@ -288,32 +162,13 @@ function user:GoToGame(gameId)
 end
 
 ----
---- Server Only
----
---- @param  gameId                string
---- @param  travelFailedCallback  fun(): void
---- @return void
-----
-function user:GoToGame(gameId, travelFailedCallback)
-end
-
-----
 --- Server Only, Local Only
 ---
+--- @overload fun(worldAsset: WorldAsset, travelFailedCallback: fun(): void): void
 --- @param  worldAsset  WorldAsset
 --- @return void
 ----
 function user:GoToWorld(worldAsset)
-end
-
-----
---- Server Only
----
---- @param  worldAsset            WorldAsset
---- @param  travelFailedCallback  fun(): void
---- @return void
-----
-function user:GoToWorld(worldAsset, travelFailedCallback)
 end
 
 ----
@@ -384,20 +239,13 @@ function user:SetLookOverride(scale, add)
 end
 
 ----
+--- @overload fun(leaderboardId: string, value: number): void
 --- @param  leaderboardId  string
 --- @param  value          number
 --- @param  callback       fun(): void
 --- @return void
 ----
 function user:SetLeaderboardValue(leaderboardId, value, callback)
-end
-
-----
---- @param  leaderboardId  string
---- @param  value          number
---- @return void
-----
-function user:SetLeaderboardValue(leaderboardId, value)
 end
 
 ----
@@ -421,24 +269,13 @@ end
 --- 
 --- Server Only
 ---
+--- @overload fun(leaderboardId: string, increment: number): void
 --- @param  leaderboardId  string
 --- @param  increment      number
 --- @param  callback       fun(score: number): void
 --- @return void
 ----
 function user:AddToLeaderboardValue(leaderboardId, increment, callback)
-end
-
-----
---- Add a number to the leaderboard value on the specified leaderboard for this user.
----
---- Server Only
----
---- @param  leaderboardId  string
---- @param  increment      number
---- @return void
-----
-function user:AddToLeaderboardValue(leaderboardId, increment)
 end
 
 ----
@@ -458,24 +295,12 @@ end
 --- 
 --- Server Only
 ---
+--- @overload fun(eventName: string): void
 --- @param  eventName             string
 --- @param  eventParametersTable  table
 --- @return void
 ----
 function user:SendChallengeEvent(eventName, eventParametersTable)
-end
-
-----
---- Please use SendGameEvent instead of this.
----
---- SendGameEvent trigger Challenges and Activities
---- 
---- Server Only
----
---- @param  eventName  string
---- @return void
-----
-function user:SendChallengeEvent(eventName)
 end
 
 ----
@@ -486,24 +311,12 @@ end
 --- 
 --- Server Only
 ---
+--- @overload fun(eventName: string): void
 --- @param  eventName             string
 --- @param  eventParametersTable  table
 --- @return void
 ----
 function user:SendXPEvent(eventName, eventParametersTable)
-end
-
-----
---- Sends an event for this user that can be used by the Challenges and Activities systems.
----
---- This is the same as sending an empty parameter list in the other SendXPEvent overload.
---- 
---- Server Only
----
---- @param  eventName  string
---- @return void
-----
-function user:SendXPEvent(eventName)
 end
 
 return user

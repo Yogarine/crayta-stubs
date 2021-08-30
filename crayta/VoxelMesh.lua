@@ -49,6 +49,7 @@ end
 --- 
 --- Server Only
 ---
+--- @overload fun(pos: Vector, halfSize: number, voxelAsset: VoxelAsset): void
 --- @param  pos         Vector
 --- @param  dimensions  Vector
 --- @param  voxelAsset  VoxelAsset
@@ -58,48 +59,19 @@ function voxelMesh:SetVoxelBox(pos, dimensions, voxelAsset)
 end
 
 ----
---- Change a cube of voxels with a given half-size in world units (centimeters) for each axis.
----
---- 1 voxel = 25cm.
---- 
---- Server Only
----
---- @param  pos         Vector
---- @param  halfSize    number
---- @param  voxelAsset  VoxelAsset
---- @return void
-----
-function voxelMesh:SetVoxelBox(pos, halfSize, voxelAsset)
-end
-
-----
 --- Change an elipsoid of voxels with given dimensions in world units (centimeters).
 ---
 --- 1 voxel = 25cm.
 --- 
 --- Server Only
 ---
+--- @overload fun(pos: Vector, radius: number, voxelAsset: VoxelAsset): void
 --- @param  pos         Vector
 --- @param  dimensions  Vector
 --- @param  voxelAsset  VoxelAsset
 --- @return void
 ----
 function voxelMesh:SetVoxelSphere(pos, dimensions, voxelAsset)
-end
-
-----
---- Change a sphere of voxels with a given radius in world units (centimeters).
----
---- 1 voxel = 25cm.
---- 
---- Server Only
----
---- @param  pos         Vector
---- @param  radius      number
---- @param  voxelAsset  VoxelAsset
---- @return void
-----
-function voxelMesh:SetVoxelSphere(pos, radius, voxelAsset)
 end
 
 ----

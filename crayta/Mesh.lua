@@ -33,31 +33,12 @@ Mesh = mesh
 ----
 --- Play a named animation on this mesh, once.
 ---
+--- @overload fun(animationName: string, looping: boolean): void
+--- @overload fun(animationName: string, properties: table): void
 --- @param  animationName  string
 --- @return void
 ----
 function mesh:PlayAnimation(animationName)
-end
-
-----
---- Play a named animation on this mesh, optionally looping.
----
---- @param  animationName  string
---- @param  looping        boolean
---- @return void
-----
-function mesh:PlayAnimation(animationName, looping)
-end
-
-----
---- Play a named animation on this mesh, optional table can contain named values looping and either
---- playbackTime or playbackSpeed
----
---- @param  animationName  string
---- @param  properties     table
---- @return void
-----
-function mesh:PlayAnimation(animationName, properties)
 end
 
 ----
@@ -72,20 +53,11 @@ end
 ----
 --- Use PlayAnimation instead, works on client or server
 ---
+--- @overload fun(animationName: string, looping: boolean): void
 --- @param  animationName  string
 --- @return void
 ----
 function mesh:PlayAnimationClient(animationName)
-end
-
-----
---- Use PlayAnimation instead, works on client or server
----
---- @param  animationName  string
---- @param  looping        boolean
---- @return void
-----
-function mesh:PlayAnimationClient(animationName, looping)
 end
 
 ----

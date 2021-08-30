@@ -19,21 +19,11 @@ end
 ---
 --- Only valid within a Schedule function
 ---
+--- @overload fun(): number
 --- @param  time  number
 --- @return number
 ----
 function Wait(time)
-	return nil
-end
-
-----
---- Wait a single frame then resume execution, and return the time taken.
----
---- Only valid within a Schedule function.
----
---- @return number
-----
-function Wait()
 	return nil
 end
 

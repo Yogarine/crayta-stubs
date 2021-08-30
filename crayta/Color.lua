@@ -12,6 +12,7 @@
 local Color = {}
 
 ----
+--- @overload fun(red: number, green: number, blue: number): void
 --- @param  red    number
 --- @param  green  number
 --- @param  blue   number
@@ -19,15 +20,6 @@ local Color = {}
 --- @return void
 ----
 function Color.New(red, green, blue, alpha)
-end
-
-----
---- @param  red    number
---- @param  green  number
---- @param  blue   number
---- @return void
-----
-function Color.New(red, green, blue)
 end
 
 return Color

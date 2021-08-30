@@ -28,6 +28,7 @@ function templateAsset:FindScriptProperty(propertyName)
 end
 
 ----
+--- @overload fun(script: ScriptAsset): Properties
 --- @param  scriptName  string
 --- @return Properties
 ----
@@ -36,26 +37,11 @@ function templateAsset:FindScriptProperties(scriptName)
 end
 
 ----
---- @param  script  ScriptAsset
---- @return Properties
-----
-function templateAsset:FindScriptProperties(script)
-	return nil
-end
-
-----
+--- @overload fun(script: ScriptAsset): table
 --- @param  scriptName  string
 --- @return table
 ----
 function templateAsset:FindAllScriptProperties(scriptName)
-	return nil
-end
-
-----
---- @param  script  ScriptAsset
---- @return table
-----
-function templateAsset:FindAllScriptProperties(script)
 	return nil
 end
 

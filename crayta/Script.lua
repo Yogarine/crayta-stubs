@@ -58,25 +58,12 @@ end
 ---
 --- eventName will be called on the listenerScriptComponent script.
 ---
+--- @overload fun(eventName: string, listenerScriptComponent: Script<Entity>, functionName: string): void
 --- @param  eventName                string
 --- @param  listenerScriptComponent  Script<Entity>
 --- @return void
 ----
 function scriptComponent:ListenForEvent(eventName, listenerScriptComponent)
-end
-
-----
---- Tell this script that listenerScriptComponent wants to be informed when it sounds eventName using
---- SendEventToListeners.
----
---- functionName will be called on the listenerScriptComponent script.
----
---- @param  eventName                string
---- @param  listenerScriptComponent  Script<Entity>
---- @param  functionName             string
---- @return void
-----
-function scriptComponent:ListenForEvent(eventName, listenerScriptComponent, functionName)
 end
 
 ----
@@ -134,23 +121,11 @@ end
 --- 
 --- Server Only
 ---
+--- @overload fun(): table
 --- @param  callback  fun(saveData: table): void
 --- @return void
 ----
 function scriptComponent:GetSaveData(callback)
-end
-
-----
---- Get the save data previously written out with SetSaveData on this script.
----
---- This function returns the save data immediately.
---- 
---- Server Only
----
---- @return table
-----
-function scriptComponent:GetSaveData()
-	return nil
 end
 
 ----

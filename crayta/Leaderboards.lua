@@ -45,23 +45,11 @@ end
 --- results, each result contains id, displayName, displayIndex, resetTime, isPeriodic, isAscending 
 --- scoreType.
 ---
+--- @overload fun(leaderboardId: string, callback: fun(metadata: LeaderboardMetadata): void): void
 --- @param  callback  fun(metadata: LeaderboardMetadata): void
 --- @return void
 ----
 function Leaderboards.GetMetadata(callback)
-end
-
-----
---- Gets the metadata of a single named leaderboard for this game.
----
---- Results are as a parameter to the callback function. Callback function parameter is a table
---- containing id, displayName, displayIndex, resetTime, isPeriodic, isAscending  scoreType.
----
---- @param  leaderboardId  string
---- @param  callback       fun(metadata: LeaderboardMetadata): void
---- @return void
-----
-function Leaderboards.GetMetadata(leaderboardId, callback)
 end
 
 ----
@@ -112,25 +100,12 @@ end
 --- results, each result contains id, displayName, displayIndex, resetTime, isPeriodic, isAscending 
 --- scoreType.
 ---
+--- @overload fun(gameId: string, leaderboardId: string, callback: fun(metadata: LeaderboardMetadata): void): void
 --- @param  gameId    string
 --- @param  callback  fun(metadata: LeaderboardMetadata): void
 --- @return void
 ----
 function Leaderboards.GetMetadataForGame(gameId, callback)
-end
-
-----
---- Gets the metadata of a single named leaderboard associated with the specified GameId.
----
---- Results are as a parameter to the callback function. Callback function parameter is a table
---- containing id, displayName, displayIndex, resetTime, isPeriodic, isAscending  scoreType.
----
---- @param  gameId         string
---- @param  leaderboardId  string
---- @param  callback       fun(metadata: LeaderboardMetadata): void
---- @return void
-----
-function Leaderboards.GetMetadataForGame(gameId, leaderboardId, callback)
 end
 
 ----
