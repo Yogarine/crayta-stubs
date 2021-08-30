@@ -7,7 +7,7 @@
 --- particular entity variable is a Light type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.6.106.99988
+--- @version 0.7.619.108548
 ---
 --- @class Light : Entity
 --- @field public color        Color @Set color of light.

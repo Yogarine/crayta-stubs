@@ -7,7 +7,7 @@
 --- do entity:IsA(User) to see if a particular entity variable is a User type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.6.106.99988
+--- @version 0.7.619.108548
 ---
 --- @class User : Entity
 --- @field public showDefaultCrosshair boolean @Show the default crosshair
@@ -85,7 +85,7 @@ end
 --- Server Only
 ---
 --- @param  playerTemplate  Template
---- @param  onEffectEnded   callback
+--- @param  onEffectEnded   fun(): void
 --- @return Character
 ----
 function user:SpawnPlayerWithEffect(playerTemplate, onEffectEnded)
@@ -101,7 +101,7 @@ end
 ---
 --- @param  playerTemplate  Template
 --- @param  locatorEntity   Locator
---- @param  onEffectEnded   callback
+--- @param  onEffectEnded   fun(): void
 --- @return Character
 ----
 function user:SpawnPlayerWithEffect(playerTemplate, locatorEntity, onEffectEnded)
@@ -117,7 +117,7 @@ end
 --- @param  playerTemplate  Template
 --- @param  position        Vector
 --- @param  rotation        Rotation
---- @param  onEffectEnded   callback
+--- @param  onEffectEnded   fun(): void
 --- @return Character
 ----
 function user:SpawnPlayerWithEffect(playerTemplate, position, rotation, onEffectEnded)
@@ -181,7 +181,7 @@ end
 ---
 --- Server Only
 ---
---- @param  onEffectEnded  callback
+--- @param  onEffectEnded  fun(): void
 --- @return void
 ----
 function user:DespawnPlayerWithEffect(onEffectEnded)
@@ -272,7 +272,7 @@ end
 ----
 --- Server Only
 ---
---- @param  travelFailedCallback  callback
+--- @param  travelFailedCallback  fun(): void
 --- @return void
 ----
 function user:LeaveGame(travelFailedCallback)
@@ -291,7 +291,7 @@ end
 --- Server Only
 ---
 --- @param  gameId                string
---- @param  travelFailedCallback  callback
+--- @param  travelFailedCallback  fun(): void
 --- @return void
 ----
 function user:GoToGame(gameId, travelFailedCallback)
@@ -310,7 +310,7 @@ end
 --- Server Only
 ---
 --- @param  worldAsset            WorldAsset
---- @param  travelFailedCallback  callback
+--- @param  travelFailedCallback  fun(): void
 --- @return void
 ----
 function user:GoToWorld(worldAsset, travelFailedCallback)
@@ -327,9 +327,11 @@ end
 
 ----
 --- Converts a position in world space to a screen space co-ordinate Returned values are in the range 0
---- to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) local user =
---- self:GetEntity():GetUser() local screenPos = user:ProjectPositionToScreen(Vector.New(0,0,0))
---- Printf("Screen pos: {1}", screenPos) end
+--- to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) 	local user =
+--- self:GetEntity():GetUser() 	local screenPos = user:ProjectPositionToScreen(Vector.New(0,0,0))
+--- 	Printf("Screen pos: {1}", screenPos) end
+---
+--- Local Only
 ---
 --- @param  worldLocation  Vector
 --- @return Vector2D
@@ -384,7 +386,7 @@ end
 ----
 --- @param  leaderboardId  string
 --- @param  value          number
---- @param  callback       callback
+--- @param  callback       fun(): void
 --- @return void
 ----
 function user:SetLeaderboardValue(leaderboardId, value, callback)
@@ -450,12 +452,9 @@ function user:GetChallengeProgress(challengeId)
 end
 
 ----
---- Sends a Challenge event for this user.
+--- Please use SendGameEvent instead of this.
 ---
---- Takes a lua table of parameter to value pairs that are conditionally checked against the Challenge
---- definition. Usage example: function MyUserScript:OnSomeAction(someValue1, someValue2)
---- self:GetUser():SendChallengeEvent("SomeEvent", {someParameter1 = someValue1, someParameter2 =
---- someValue2}) end
+--- SendGameEvent trigger Challenges and Activities
 --- 
 --- Server Only
 ---
@@ -467,14 +466,44 @@ function user:SendChallengeEvent(eventName, eventParametersTable)
 end
 
 ----
---- Sends a Challenge event for this user.
+--- Please use SendGameEvent instead of this.
 ---
+--- SendGameEvent trigger Challenges and Activities
+--- 
 --- Server Only
 ---
 --- @param  eventName  string
 --- @return void
 ----
 function user:SendChallengeEvent(eventName)
+end
+
+----
+--- Sends an event for this user that can be used by the Challenges and Activities systems.
+---
+--- Takes a lua table of named parameters which are checked against the conditions inside each challenge
+--- and activity.
+--- 
+--- Server Only
+---
+--- @param  eventName             string
+--- @param  eventParametersTable  table
+--- @return void
+----
+function user:SendXPEvent(eventName, eventParametersTable)
+end
+
+----
+--- Sends an event for this user that can be used by the Challenges and Activities systems.
+---
+--- This is the same as sending an empty parameter list in the other SendXPEvent overload.
+--- 
+--- Server Only
+---
+--- @param  eventName  string
+--- @return void
+----
+function user:SendXPEvent(eventName)
 end
 
 return user

@@ -8,7 +8,7 @@
 --- Character type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.6.106.99988
+--- @version 0.7.619.108548
 ---
 --- @class Character : Entity
 --- @field public speedMultiplier              number @Multiplier on movement speed (default is 1.0)
@@ -56,7 +56,7 @@ Character = character
 --- @param  socketName      string
 --- @return void
 ----
-function characterToAttachTo:Attach(entityToAttach, socketName)
+function character:Attach(entityToAttach, socketName)
 end
 
 ----

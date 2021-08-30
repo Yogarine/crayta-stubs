@@ -1,13 +1,13 @@
 --------------------------------------------------------------------------------------------------------
 --- An Entity can have a single physical representation.
 ---
---- Voxels represents a voxel mesh which is edited to a start state in the editor and can be changed
---- during gameplay. Voxels derives from Entity so if you have a Voxels you can do any of these
---- functions as well as the functions in Entity. You can do entity:IsA(Voxels) to see if a particular
---- entity variable is a Voxels type entity.
+--- VoxelMesh represents a mesh made of voxels, created within the Crayta editor. VoxelMesh derives from
+--- Entity so if you have a VoxelMesh you can do any of these functions as well as the functions in
+--- Entity. You can do entity:IsA(VoxelMesh) to see if a particular entity variable is a VoxelMesh type
+--- entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.6.106.99988
+--- @version 0.7.619.108548
 ---
 --- @class VoxelMesh : Entity
 --- @field public mesh      VoxelMeshAsset @Get or change the voxel mesh asset

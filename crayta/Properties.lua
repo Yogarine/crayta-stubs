@@ -4,7 +4,7 @@
 --- table).
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.6.106.99988
+--- @version 0.7.619.108548
 ---
 --- @class Properties
 --- @field public [string] PropertyValue|PropertyArray<PropertyValue> @Get the value of a property

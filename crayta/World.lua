@@ -2,7 +2,7 @@
 --- Functions that effect everything within the current world.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.6.106.99988
+--- @version 0.7.619.108548
 ---
 --- @class World
 --- @field public startTime               number @Start time of day from 0.0 (midnight) - 0.5 (midday) -
@@ -115,10 +115,10 @@ end
 --- Most often used where multiple scripts are used to simulate an array of structures.
 ---
 --- @param  scriptName  string
---- @return table
+--- @return Script<Entity>[]
 ----
 function world:FindAllScripts(scriptName)
-	return nil
+	return {}
 end
 
 ----
@@ -127,10 +127,10 @@ end
 --- Most often used where multiple scripts are used to simulate an array of structures.
 ---
 --- @param  templateRefScript  ScriptAsset
---- @return table
+--- @return Script<Entity>[]
 ----
 function world:FindAllScripts(templateRefScript)
-	return nil
+	return {}
 end
 
 ----
@@ -217,8 +217,9 @@ end
 ---
 --- DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or
 --- scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and
---- { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset,
---- damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }
+--- { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel =
+--- voxelasset, damageMultiplier = number },                      { voxel = voxelasset, damageMultiplier
+--- = number },                      script,                      script                   }
 --- 
 --- Server Only
 ---
@@ -252,8 +253,9 @@ end
 ---
 --- DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or
 --- scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and
---- { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset,
---- damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }
+--- { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel =
+--- voxelasset, damageMultiplier = number },                      { voxel = voxelasset, damageMultiplier
+--- = number },                      script,                      script                   }
 --- 
 --- Server Only
 ---
@@ -274,9 +276,11 @@ end
 --- VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables,
 --- and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel",
 --- type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime",
---- type = "number", editor = "seconds", default = 3 }. voxelProperties = { { voxel = voxelasset, health
---- = number, healTime = number }, { voxel = voxelasset, health = number }, { voxel = voxelasset,
---- healTime = number }, script, script } Defaults are 100 for health, 3.0 for heal time.
+--- type = "number", editor = "seconds", default = 3 }. voxelProperties = {                      { voxel
+--- = voxelasset, health = number, healTime = number },                      { voxel = voxelasset,
+--- health = number },                      { voxel = voxelasset, healTime = number },                  
+---    script,                      script                   } Defaults are 100 for health, 3.0 for heal
+--- time.
 ---
 --- @param  voxelPropertiesTable  table
 --- @return void
@@ -290,10 +294,11 @@ end
 --- VoxelProperties is a table of { voxel = voxelasset, health = number, healTime = number } tables,
 --- and/or scripts that have voxel, and optionally health and healTime properties: { name = "voxel",
 --- type = "voxelasset" }, { name = "health", type = "number", default = 100 }, { name = "healTime",
---- type = "number", editor = "seconds", default = 3 }. voxelProperties = { { voxel = voxelasset, health
---- = number, healTime = number }, { voxel = voxelasset, health = number }, { voxel = voxelasset,
---- healTime = number }, script, script } Defaults are 100 for health, 3.0 for heal time, these can be
---- modified in this version of the function.
+--- type = "number", editor = "seconds", default = 3 }. voxelProperties = {                      { voxel
+--- = voxelasset, health = number, healTime = number },                      { voxel = voxelasset,
+--- health = number },                      { voxel = voxelasset, healTime = number },                  
+---    script,                      script                   } Defaults are 100 for health, 3.0 for heal
+--- time, these can be modified in this version of the function.
 ---
 --- @param  voxelPropertiesTable  table
 --- @param  defaultMaxHealth      number

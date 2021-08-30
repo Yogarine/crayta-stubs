@@ -6,7 +6,7 @@
 --- Camera type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.6.106.99988
+--- @version 0.7.619.108548
 ---
 --- @class Camera : Entity
 --- @field public fov number @Field of view property of the camera

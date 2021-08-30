@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------------------------------
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.6.106.99988
+--- @version 0.7.619.108548
 ---
 --- @class Globals
 --------------------------------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ end
 
 ----
 --- Wait for at least given time interval in seconds then resume execution, and return the exact time
---- taken which is = Time seconds.
+--- taken (which will be the next frame after time seconds).
 ---
 --- Only valid within a Schedule function
 ---
@@ -29,9 +29,7 @@ end
 ----
 --- Wait a single frame then resume execution, and return the time taken.
 ---
---- Only valid within a Schedule function. Within a Schedule function this is how you implement a loop
---- to make something happen every frame and give you a delta of time between the frames for smooth
---- animation.
+--- Only valid within a Schedule function.
 ---
 --- @return number
 ----
@@ -60,8 +58,8 @@ function Print(...)
 end
 
 ----
---- This print function replaces instances of {1} with the first argument passed in, {2} with the second
---- etc (same as Printf).
+--- This print function replaces instances of {1} in format with the first argument passed in, {2} with
+--- the second etc (same as Printf).
 ---
 --- @param  format  string
 --- @vararg any
@@ -71,8 +69,8 @@ function printf(format, ...)
 end
 
 ----
---- This print function replaces instances of {1} with the first argument passed in, {2} with the second
---- etc (same as printf).
+--- This print function replaces instances of {1} in format with the first argument passed in, {2} with
+--- the second etc (same as printf).
 ---
 --- @param  format  string
 --- @vararg any
@@ -82,7 +80,7 @@ function Printf(format, ...)
 end
 
 ----
---- Format a string using either {1}, {2}, etc or using named variables.
+--- Format a string using either {1}, {2} as in Printf, etc or using named variables.
 ---
 --- @param  format  string
 --- @vararg any
@@ -90,13 +88,6 @@ end
 ----
 function FormatString(format, ...)
 	return nil
-end
-
-----
---- @vararg any
---- @return void
-----
-function ScreenPrint(...)
 end
 
 ----

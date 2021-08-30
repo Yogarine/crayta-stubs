@@ -5,7 +5,7 @@
 --- (mesh, light). Additionally there are two special types that derive from Entity (Player and User).
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.6.106.99988
+--- @version 0.7.619.108548
 ---
 --- @class Entity
 --- @field public visible                    boolean @Set whether any physical aspect of the Entity
@@ -33,9 +33,12 @@ local entity = {}
 Entity = entity
 
 ----
+--- Returns true if the parameter passed to it is a valid entity
+---
+--- @param  entity  Entity
 --- @return boolean
 ----
-function entity:IsValid()
+function Entity.IsValid(entity)
 	return nil
 end
 
@@ -528,10 +531,12 @@ end
 --- that), also pass a HitResult from a World Raycast function and a shootDirection Vector and
 --- fromEntity which will be passed to the OnDamage function.
 ---
---- DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or
+--- DamageModifiers is a table of { voxel = <voxelasset>, damageMultiplier = <number> } tables, and/or
 --- scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and
---- { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset,
---- damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }
+--- { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel =
+--- <voxelasset>, damageMultiplier = <number> },                      { voxel = <voxelasset>,
+--- damageMultiplier = <number> },                      <script>,                      <script>         
+---          }
 ---
 --- @param  damageAmount     number
 --- @param  hitResult        HitResult
@@ -561,10 +566,12 @@ end
 --- that), also pass a shootDirection Vector and fromEntity which will be passed to the OnDamage
 --- function.
 ---
---- DamageModifiers is a table of { voxel = voxelasset, damageMultiplier = number } tables, and/or
+--- DamageModifiers is a table of { voxel = <voxelasset>, damageMultiplier = <number> } tables, and/or
 --- scripts that have voxel and damageMultiplier properties: { name = "voxel", type = "voxelasset" } and
---- { name = "damageMultiplier", type = "number" }. damageModifiers = { { voxel = voxelasset,
---- damageMultiplier = number }, { voxel = voxelasset, damageMultiplier = number }, script, script }
+--- { name = "damageMultiplier", type = "number" }. damageModifiers = {                      { voxel =
+--- <voxelasset>, damageMultiplier = <number> },                      { voxel = <voxelasset>,
+--- damageMultiplier = <number> },                      <script>,                      <script>         
+---          }
 ---
 --- @param  damageAmount     number
 --- @param  shootDirection   Vector
@@ -728,7 +735,7 @@ end
 --- Find a script with the named property on it and return value from the property
 ---
 --- @param  propertyName  string
---- @return table
+--- @return PropertyValue
 ----
 function entity:FindScriptProperty(propertyName)
 	return nil
@@ -740,10 +747,10 @@ end
 --- Most often used where multiple scripts are used to simulate an array of structures.
 ---
 --- @param  scriptName  string
---- @return table
+--- @return Script<Entity>[]
 ----
 function entity:FindAllScripts(scriptName)
-	return nil
+	return {}
 end
 
 ----
@@ -752,10 +759,10 @@ end
 --- Most often used where multiple scripts are used to simulate an array of structures.
 ---
 --- @param  templateRefScript  ScriptAsset
---- @return table
+--- @return Script<Entity>[]
 ----
 function entity:FindAllScripts(templateRefScript)
-	return nil
+	return {}
 end
 
 ----
@@ -766,10 +773,10 @@ end
 ---
 --- @param  scriptName  string
 --- @param  recursive   boolean
---- @return table
+--- @return Script<Entity>[]
 ----
 function entity:FindAllScripts(scriptName, recursive)
-	return nil
+	return {}
 end
 
 ----
@@ -780,10 +787,10 @@ end
 ---
 --- @param  templateRefScript  ScriptAsset
 --- @param  recursive          boolean
---- @return table
+--- @return Script<Entity>[]
 ----
 function entity:FindAllScripts(templateRefScript, recursive)
-	return nil
+	return {}
 end
 
 ----
@@ -858,25 +865,12 @@ function entity:SendTelemetry(type, parametersTable)
 end
 
 ----
---- Play a timeline from an array of values.
----
---- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
---- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
----
---- @param  timelineArray  table
---- @return number
-----
-function entity:PlayTimeline(timelineArray)
-	return nil
-end
-
-----
 --- Play a timeline from variable args.
 ---
 --- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
 --- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
+--- previous key and this one, from EaseIn, EaseOut, EaseInOut, Linear (default) The easing types can
+--- also be set per axis, this is described in one of the examples.
 ---
 --- @vararg any
 --- @return number
@@ -886,24 +880,9 @@ function entity:PlayTimeline(...)
 end
 
 ----
---- Loop a timeline from an array of values.
----
---- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
---- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
----
---- @param  timelineArray  table
---- @return void
-----
-function entity:PlayTimelineLoop(timelineArray)
-end
-
-----
 --- Loop a timeline from variable args.
 ---
---- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
---- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
+--- See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.
 ---
 --- @vararg any
 --- @return void
@@ -912,24 +891,9 @@ function entity:PlayTimelineLoop(...)
 end
 
 ----
---- Loop a timeline back and forth from an array of values.
+--- Loop a timeline back and forth from variable args.
 ---
---- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
---- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
----
---- @param  timelineArray  table
---- @return void
-----
-function entity:PlayTimelinePingPong(timelineArray)
-end
-
-----
---- Loop a timeline back and forth Play a timeline from variable args.
----
---- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
---- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
+--- See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.
 ---
 --- @vararg any
 --- @return void
@@ -938,25 +902,9 @@ function entity:PlayTimelinePingPong(...)
 end
 
 ----
---- Play a timeline, relative to an entity's parent transform, from an array of values.
----
---- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
---- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
----
---- @param  timelineArray  table
---- @return number
-----
-function entity:PlayRelativeTimeline(timelineArray)
-	return nil
-end
-
-----
 --- Play a timeline, relative to an entity's parent transform, from variable args.
 ---
---- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
---- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
+--- See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.
 ---
 --- @vararg any
 --- @return number
@@ -966,25 +914,9 @@ function entity:PlayRelativeTimeline(...)
 end
 
 ----
---- Loop a timeline, relative to an entity's parent transform, from an array of values.
----
---- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
---- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
----
---- @param  timelineArray  table
---- @return number
-----
-function entity:PlayRelativeTimelineLoop(timelineArray)
-	return nil
-end
-
-----
 --- Loop a timeline, relative to an entity's parent transform, from variable args.
 ---
---- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
---- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
+--- See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.
 ---
 --- @vararg any
 --- @return number
@@ -994,25 +926,9 @@ function entity:PlayRelativeTimelineLoop(...)
 end
 
 ----
---- Loop a timeline back and forth, relative to an entity's parent transform.
----
---- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
---- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
----
---- @param  timelineArray  table
---- @return number
-----
-function entity:PlayRelativeTimelinePingPong(timelineArray)
-	return nil
-end
-
-----
 --- Loop a timeline back and forth, relative to an entity's parent transform, from variable args.
 ---
---- Each key on the timeline is a number for time in seconds followed by a Vector and/or Rotation. An
---- optional easing type can be given for each key, which describes how to interpolate between the
---- previous key and this one, from "EaseIn", EaseOut", "EaseInOut", "Linear" (default)
+--- See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.
 ---
 --- @vararg any
 --- @return number

@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------------------------------
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.6.106.99988
+--- @version 0.7.619.108548
 ---
 --- @class Leaderboards
 --------------------------------------------------------------------------------------------------------
@@ -11,7 +11,8 @@ local Leaderboards = {}
 --- user where possible.
 ---
 --- Results are returned as a parameter to the callback function. Callback function parameter is a table
---- of results, each result contains name, score, rank  icon
+--- of results, each result contains name, score, rank  icon. May return cached results if used
+--- frequently.
 ---
 --- @param  leaderboardId  string
 --- @param  numValues      number
@@ -26,7 +27,8 @@ end
 --- Gets the top ranking values from the specified leaderboard.
 ---
 --- Results are returned as a parameter to the callback function. Callback function parameter is a table
---- of results, each result contains name, score, rank  icon
+--- of results, each result contains name, score, rank  icon. May return cached results if used
+--- frequently.
 ---
 --- @param  leaderboardId  string
 --- @param  numValues      number
@@ -73,7 +75,8 @@ end
 --- Gets nearby leaderboard values for the specified GameId.
 ---
 --- Results are returned as a parameter to the callback function. Callback function parameter is a table
---- of results, each result contains name, score, rank  icon
+--- of results, each result contains name, score, rank  icon. May return cached results if used
+--- frequently.
 ---
 --- @param  gameId         string
 --- @param  leaderboardId  string
@@ -89,7 +92,8 @@ end
 --- Gets the top ranking values for the specified GameId Results are returned as a parameter to the
 --- callback function.
 ---
---- Callback function parameter is a table of results, each result contains name, score, rank  icon
+--- Callback function parameter is a table of results, each result contains name, score, rank  icon. May
+--- return cached results if used frequently.
 ---
 --- @param  gameId         string
 --- @param  leaderboardId  string

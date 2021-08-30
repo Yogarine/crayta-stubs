@@ -4,7 +4,7 @@
 --- Within a script function it is accessed through the self local variable.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.6.106.99988
+--- @version 0.7.619.108548
 ---
 --- @class Script<T : Entity>
 --- @field public properties  Properties 
@@ -558,15 +558,19 @@ function Script:OnHotbarChanged(hotbarIndex)
 end
 
 ----
---- Called when a quick chat message is triggered by the user
+--- Called when a quick chat message is triggered by a user
 ---
+--- @param  user     User
+--- @param  message  Text
 --- @return void
 ----
-function Script:OnChatMessage()
+function Script:OnChatMessage(user, message)
 end
 
 ----
 --- Called on the server when an entity is destroyed
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -576,6 +580,8 @@ end
 ----
 --- Called when the character starts to mantle up to a platform
 ---
+--- Local Only
+---
 --- @return void
 ----
 function Script:LocalOnMantleStart()
@@ -583,6 +589,8 @@ end
 
 ----
 --- Called when the character starts to mantle up to a platform
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -592,6 +600,8 @@ end
 ----
 --- Called when the character stops to mantling up to a platform
 ---
+--- Local Only
+---
 --- @return void
 ----
 function Script:LocalOnMantleStop()
@@ -599,6 +609,8 @@ end
 
 ----
 --- Called when the character stops to mantling up to a platform
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -608,6 +620,8 @@ end
 ----
 --- Called when the character starts to slide
 ---
+--- Local Only
+---
 --- @return void
 ----
 function Script:LocalOnSlideStart()
@@ -615,6 +629,8 @@ end
 
 ----
 --- Called when the character starts to slide
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -624,6 +640,8 @@ end
 ----
 --- Called when the character stops sliding
 ---
+--- Local Only
+---
 --- @return void
 ----
 function Script:LocalOnSlideStop()
@@ -631,6 +649,8 @@ end
 
 ----
 --- Called when the character stops sliding
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -640,6 +660,8 @@ end
 ----
 --- Called when the character starts to roll
 ---
+--- Local Only
+---
 --- @return void
 ----
 function Script:LocalOnRollStart()
@@ -647,6 +669,8 @@ end
 
 ----
 --- Called when the character starts to roll
+---
+--- Server Only
 ---
 --- @return void
 ----
@@ -656,6 +680,8 @@ end
 ----
 --- Called when the character stops rolling
 ---
+--- Local Only
+---
 --- @return void
 ----
 function Script:LocalOnRollStop()
@@ -664,9 +690,42 @@ end
 ----
 --- Called when the character stops rolling
 ---
+--- Server Only
+---
 --- @return void
 ----
 function Script:OnRollStop()
+end
+
+----
+--- Called when the character spawn effect has ended
+---
+--- Local Only
+---
+--- @return void
+----
+function Script:LocalOnSpawnEffectEnded()
+end
+
+----
+--- Called when the character spawn effect has ended
+---
+--- Server Only
+---
+--- @return void
+----
+function Script:OnSpawnEffectEnded()
+end
+
+----
+--- Called when an activity is triggered
+---
+--- @param  id        string
+--- @param  display   string
+--- @param  category  string
+--- @return void
+----
+function Script:OnActivityTriggered(id, display, category)
 end
 
 return scriptComponent

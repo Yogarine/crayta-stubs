@@ -7,7 +7,7 @@
 --- type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.6.106.99988
+--- @version 0.7.619.108548
 ---
 --- @class Mesh : Entity
 --- @field public collisionEnabled boolean @Turn on or off collision (ie calling entry point
@@ -50,6 +50,17 @@ function mesh:PlayAnimation(animationName, looping)
 end
 
 ----
+--- Play a named animation on this mesh, optional table can contain named values looping and either
+--- playbackTime or playbackSpeed
+---
+--- @param  animationName  string
+--- @param  properties     table
+--- @return void
+----
+function mesh:PlayAnimation(animationName, properties)
+end
+
+----
 --- Play a named animation on this mesh, repeatedly.
 ---
 --- @param  animationName  string
@@ -59,7 +70,7 @@ function mesh:PlayAnimationLooping(animationName)
 end
 
 ----
---- Play a named animation on this mesh, once, for this client only
+--- Use PlayAnimation instead, works on client or server
 ---
 --- @param  animationName  string
 --- @return void
@@ -68,7 +79,7 @@ function mesh:PlayAnimationClient(animationName)
 end
 
 ----
---- Play a named animation on this mesh, optionally looping, for this client only
+--- Use PlayAnimation instead, works on client or server
 ---
 --- @param  animationName  string
 --- @param  looping        boolean
@@ -78,7 +89,7 @@ function mesh:PlayAnimationClient(animationName, looping)
 end
 
 ----
---- Play a named animation on this mesh, repeatedly, for this client only
+--- Use PlayAnimation instead, works on client or server
 ---
 --- @param  animationName  string
 --- @return void
