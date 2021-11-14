@@ -2,7 +2,7 @@
 --- Vector2D
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class Vector2D
 --- @field public x         number @X component of 2D vector

@@ -7,7 +7,7 @@
 --- type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class Mesh : Entity
 --- @field public collisionEnabled boolean @Turn on or off collision (ie calling entry point
@@ -33,21 +33,24 @@ Mesh = mesh
 ----
 --- Play a named animation on this mesh, once.
 ---
---- @overload fun(animationName: string, looping: boolean): void
---- @overload fun(animationName: string, properties: table): void
+--- @overload fun(animationName: string, looping: boolean): AnimationHandle
+--- @overload fun(animationName: string, properties: table): AnimationHandle
 --- @param  animationName  string
---- @return void
+--- @return AnimationHandle
 ----
 function mesh:PlayAnimation(animationName)
+	return nil
 end
 
 ----
 --- Play a named animation on this mesh, repeatedly.
 ---
+--- @overload fun(animationName: string, properties: table): AnimationHandle
 --- @param  animationName  string
---- @return void
+--- @return AnimationHandle
 ----
 function mesh:PlayAnimationLooping(animationName)
+	return nil
 end
 
 ----
@@ -75,6 +78,16 @@ end
 --- @return table
 ----
 function mesh:GetAnimationNames()
+	return nil
+end
+
+----
+--- Get the length of an animation in seconds
+---
+--- @param  animationName  string
+--- @return number
+----
+function mesh:GetAnimationLength(animationName)
 	return nil
 end
 

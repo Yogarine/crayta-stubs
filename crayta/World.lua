@@ -2,34 +2,48 @@
 --- Functions that effect everything within the current world.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class World
---- @field public startTime               number @Start time of day from 0.0 (midnight) - 0.5 (midday) -
----                                              1.0 (next midnight)
---- @field public dayLength               number @Length of virtual 'day' in real-time seconds
---- @field public sunDirection            number @Angle of sun in degrees. Controls whether the sun
----                                              rises from west to east, north to south, etc.
---- @field public sunColor                 Color @Color of the sun
---- @field public sunIntensity            number @Intensity of the sun
---- @field public heightFogStartDistance  number @Height fog start distance
---- @field public heightFogFalloff        number @Height fog falloff
---- @field public heightFogDensity        number @Height fog density
---- @field public heightFogColor           Color @Color of the height fog
---- @field public skyLightIntensity       number @Intensity of the ambient light
---- @field public skyLightColor            Color @Color of the ambient light
---- @field public postProcess   PostProcessAsset @Post Process effect
---- @field public colorGrading ColorGradingAsset @Color Grading effect
---- @field public skydome           SkydomeAsset @Skydome asset
---- @field public innerHorizon InnerHorizonAsset @Inner Horizon asset
---- @field public outerHorizon OuterHorizonAsset @Outer Horizon asset
---- @field public skyMesh           SkyMeshAsset @Sky Mesh asset
---- @field public deathPlaneActive       boolean @Set whether the death plane is active or not
---- @field public deathPlaneZ             number @Height of the death plane, when active the game will
----                                              send OnFellToDeath to any Player who falls below this,
----                                              automatically putting the Player back to where they
----                                              spawned if the event is not responded to by any
----                                              scripts.
+--- @field public startTime                 number @Start time of day from 0.0 (midnight) - 0.5 (midday)
+---                                                - 1.0 (next midnight)
+--- @field public dayLength                 number @Length of virtual 'day' in real-time seconds
+--- @field public sunDirection              number @Angle of sun in degrees. Controls whether the sun
+---                                                rises from west to east, north to south, etc.
+--- @field public sunColor                   Color @Color of the sun
+--- @field public sunIntensity              number @Intensity of the sun
+--- @field public heightFogStartDistance    number @Height fog start distance
+--- @field public heightFogFalloff          number @Height fog falloff
+--- @field public heightFogDensity          number @Height fog density
+--- @field public heightFogColor             Color @Color of the height fog
+--- @field public skyLightIntensity         number @Intensity of the ambient light
+--- @field public skyLightColor              Color @Color of the ambient light
+--- @field public postProcess     PostProcessAsset @Post Process effect
+--- @field public colorGrading   ColorGradingAsset @Color Grading effect
+--- @field public skydome             SkydomeAsset @Skydome asset
+--- @field public innerHorizon   InnerHorizonAsset @Inner Horizon asset
+--- @field public outerHorizon   OuterHorizonAsset @Outer Horizon asset
+--- @field public skyMesh             SkyMeshAsset @Sky Mesh asset
+--- @field public enableShadows            boolean @Enable/Disable Shadows
+--- @field public fogStartDistance          number @Fog start distance
+--- @field public fogDensity                number @Fog density
+--- @field public fogFalloff                number @Fog falloff
+--- @field public fogColor                   Color @Color of the fog
+--- @field public fogAffectedByAtmosphere  boolean @Fog Affects Atmosphere
+--- @field public cloudDensity              number @Cloud Density
+--- @field public cloudCoverage             number @Cloud Coverage
+--- @field public cloudAltitude             number @Cloud Altitude
+--- @field public cloudLayerThickness       number @Cloud Layer Thickness
+--- @field public atmosphereThickness       number @Set the thickness of the atmosphere. 1 = None, 2 =
+---                                                Thin, 3 = Earth-Like
+--- @field public atmosphericScatteringColor color @Atmospheric Scattering Color
+--- @field public atmosphereTint             color @Atmosphere Tint
+--- @field public deathPlaneActive         boolean @Set whether the death plane is active or not
+--- @field public deathPlaneZ               number @Height of the death plane, when active the game will
+---                                                send OnFellToDeath to any Player who falls below
+---                                                this, automatically putting the Player back to where
+---                                                they spawned if the event is not responded to by any
+---                                                scripts.
 --------------------------------------------------------------------------------------------------------
 local world = {}
 World = world
@@ -51,6 +65,8 @@ end
 --- ray from a gun the player is holding).
 ---
 --- @overload fun(startPosition: Vector, endPosition: Vector, entitiesToIgnoreTable: Entity[], collisionCallback: fun(entity: Entity, hitResult: HitResult): void): void
+--- @overload fun(startPosition: Vector, endPosition: Vector, entityToIgnore: Entity, highFidelityCollision: boolean, collisionCallback: fun(entity: Entity, hitResult: HitResult): void): void
+--- @overload fun(startPosition: Vector, endPosition: Vector, entitiesToIgnoreTable: Entity[], highFidelityCollision: boolean, collisionCallback: fun(entity: Entity, hitResult: HitResult): void): void
 --- @param  startPosition      Vector
 --- @param  endPosition        Vector
 --- @param  entityToIgnore     Entity
@@ -89,9 +105,9 @@ end
 ---
 --- Most often used where multiple scripts are used to simulate an array of structures.
 ---
---- @overload fun(templateRefScript: ScriptAsset): Script<Entity>[]
+--- @overload fun(templateRefScript: ScriptAsset): Script<self>[]
 --- @param  scriptName  string
---- @return Script<Entity>[]
+--- @return Script<self>[]
 ----
 function world:FindAllScripts(scriptName)
 	return {}
@@ -145,8 +161,8 @@ end
 ----
 --- Call the given callback for each User with the User as the argument
 ---
---- @param  callback  fun(user: User, ...): void
---- @vararg any
+--- @param  callback  fun(user: User, ...: any|nil): void
+--- @vararg any|nil
 --- @return void
 ----
 function world:ForEachUser(callback, ...)
@@ -203,7 +219,7 @@ function world:SetVoxelProperties(voxelPropertiesTable)
 end
 
 ----
---- Get the time of day (see SetTimeOfTime for what the return value means)
+--- Get the time of day as a value between 0 and 1
 ---
 --- @return number
 ----
@@ -234,7 +250,7 @@ end
 --- client scripts only.
 ---
 --- @param  eventName  string
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function world:BroadcastToScripts(eventName, ...)
@@ -276,6 +292,31 @@ end
 --- @return table
 ----
 function world:GetActiveChallenges()
+	return nil
+end
+
+----
+--- Play a camera shake effect at this location in the world with a scale multiplier
+---
+--- @overload fun(cameraShake: CameraShakeAsset, location: Vector, innerRadius: number, outerRadius: number, falloff: number, orientToDirection: boolean): void
+--- @param  cameraShake        CameraShakeAsset
+--- @param  scale              number
+--- @param  location           Vector
+--- @param  innerRadius        number
+--- @param  outerRadius        number
+--- @param  falloff            number
+--- @param  orientToDirection  boolean
+--- @return void
+----
+function world:PlayCameraShakeEffectAtLocation(cameraShake, scale, location, innerRadius, outerRadius, falloff, orientToDirection)
+end
+
+----
+--- Returns the WorldAsset that's currently loaded
+---
+--- @return WorldAsset
+----
+function world:GetWorldAsset()
 	return nil
 end
 

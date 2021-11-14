@@ -7,7 +7,7 @@
 --- particular entity variable is a Light type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class Light : Entity
 --- @field public color        Color @Set color of light.
@@ -15,6 +15,9 @@
 --- @field public innerAngle  number @Set inner angle of a spot light (units?)
 --- @field public outerAngle  number @Set outer angle of a spot light (units?)
 --- @field public attenuation number @Set attenuation of the light (units?)
+--- @field public exponent    number 
+--- @field public specular   boolean 
+--- @field public shadows    boolean 
 --------------------------------------------------------------------------------------------------------
 local Light = {}
 

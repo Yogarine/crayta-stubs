@@ -3,7 +3,7 @@
 --- (GetPosition) and what the normal vector of the collision is (GetNormal).
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class HitResult
 --------------------------------------------------------------------------------------------------------
@@ -43,6 +43,17 @@ end
 --- @return Vector
 ----
 function hitResult:GetRelativeNormal()
+	return nil
+end
+
+----
+--- get the name of the part of the entity that was hit.
+---
+--- For example a headshot on a player character will return 'head'
+---
+--- @return string
+----
+function hitResult:GetPartName()
 	return nil
 end
 

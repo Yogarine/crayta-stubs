@@ -4,7 +4,7 @@
 --- Within a script function it is accessed through the self local variable.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class Script<T : Entity>
 --- @field public properties  Properties 
@@ -72,7 +72,7 @@ end
 --- If called on the server do it only on the server, if called on a client do it only on that client.
 ---
 --- @param  eventName  string
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function scriptComponent:SendEventToListeners(eventName, ...)
@@ -85,7 +85,7 @@ end
 --- can be passed to Cancel
 ---
 --- @param  callback  fun(): void
---- @return Handle
+--- @return ScheduleHandle
 ----
 function scriptComponent:Schedule(callback)
 	return nil
@@ -94,7 +94,7 @@ end
 ----
 --- Cancel a scheduled task if its running.
 ---
---- @param  handle  Handle
+--- @param  handle  ScheduleHandle
 --- @return void
 ----
 function scriptComponent:Cancel(handle)
@@ -132,7 +132,7 @@ end
 --- Call eventName on this script if it exists, with the given args.
 ---
 --- @param  eventName  string
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function scriptComponent:SendToScript(eventName, ...)
@@ -147,7 +147,7 @@ end
 --- Server Only
 ---
 --- @param  eventName  string
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function scriptComponent:SendToAllClients(eventName, ...)
@@ -159,7 +159,7 @@ end
 --- Local Only
 ---
 --- @param  eventName  string
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function scriptComponent:SendToServer(eventName, ...)
@@ -171,7 +171,7 @@ end
 --- Server Only
 ---
 --- @param  eventName  string
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function scriptComponent:SendToLocal(eventName, ...)
@@ -205,8 +205,6 @@ end
 ----
 --- Called when an entity is damaged on all scripts of the entity.
 ---
---- TODO: work out what gets passed in here for radial damage instead of the HitResult.
---- 
 --- Server Only
 ---
 --- @param  damageAmount  number

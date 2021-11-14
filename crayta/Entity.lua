@@ -5,7 +5,7 @@
 --- (mesh, light). Additionally there are two special types that derive from Entity (Player and User).
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class Entity
 --- @field public visible                    boolean @Set whether any physical aspect of the Entity
@@ -207,6 +207,24 @@ function entity:GetForward()
 end
 
 ----
+--- Get the right facing vector of an Entity from its rotation.
+---
+--- @return Vector
+----
+function entity:GetRight()
+	return nil
+end
+
+----
+--- Get the up facing vector of an Entity from its rotation.
+---
+--- @return Vector
+----
+function entity:GetUp()
+	return nil
+end
+
+----
 --- Set the rotation of an Entity to make its front face in a given direction.
 ---
 --- @overload fun(forward: Vector, up: Vector): void
@@ -219,10 +237,10 @@ end
 ----
 --- Play a sound Asset on this Entity, returning a Handle which can be used to stop the sound.
 ---
---- @overload fun(sound: SoundAsset, fadeIn: number): Handle
---- @overload fun(sound: SoundAsset, fadeIn: number, groupName: string): Handle
+--- @overload fun(sound: SoundAsset, fadeIn: number): SoundHandle
+--- @overload fun(sound: SoundAsset, fadeIn: number, groupName: string): SoundHandle
 --- @param  sound  SoundAsset
---- @return Handle
+--- @return SoundHandle
 ----
 function entity:PlaySound(sound)
 	return nil
@@ -232,10 +250,10 @@ end
 --- Play a sound Asset on this Entity but without a 3D transform on the sound (useful for UI sounds,
 --- stereo music stings, etc).
 ---
---- @overload fun(sound: SoundAsset, fadeIn: number): Handle
---- @overload fun(sound: SoundAsset, fadeIn: number, groupName: string): Handle
+--- @overload fun(sound: SoundAsset, fadeIn: number): SoundHandle
+--- @overload fun(sound: SoundAsset, fadeIn: number, groupName: string): SoundHandle
 --- @param  sound  SoundAsset
---- @return Handle
+--- @return SoundHandle
 ----
 function entity:PlaySound2D(sound)
 	return nil
@@ -244,11 +262,11 @@ end
 ----
 --- Play a sound Asset on this Entity at the given location.
 ---
---- @overload fun(location: Vector, sound: SoundAsset, fadeIn: number): Handle
---- @overload fun(location: Vector, sound: SoundAsset, fadeIn: number, groupName: string): Handle
+--- @overload fun(location: Vector, sound: SoundAsset, fadeIn: number): SoundHandle
+--- @overload fun(location: Vector, sound: SoundAsset, fadeIn: number, groupName: string): SoundHandle
 --- @param  location  Vector
 --- @param  sound     SoundAsset
---- @return Handle
+--- @return SoundHandle
 ----
 function entity:PlaySoundAtLocation(location, sound)
 	return nil
@@ -257,20 +275,20 @@ end
 ----
 --- Given a sound Handle stop the sound on this Entity.
 ---
---- @overload fun(soundHandle: Handle, fadeOut: number): void
---- @param  soundHandle  Handle
+--- @overload fun(handle: SoundHandle, fadeOut: number): void
+--- @param  handle  SoundHandle
 --- @return void
 ----
-function entity:StopSound(soundHandle)
+function entity:StopSound(handle)
 end
 
 ----
 --- Play a particle effect Asset on this Entity, returning a Handle which can be used to stop the
 --- effect.
 ---
---- @overload fun(effect: EffectAsset, attached: boolean): Handle
+--- @overload fun(effect: EffectAsset, attached: boolean): EffectHandle
 --- @param  effect  EffectAsset
---- @return Handle
+--- @return EffectHandle
 ----
 function entity:PlayEffect(effect)
 	return nil
@@ -280,21 +298,21 @@ end
 --- Play a particle effect Asset at a given world location and rotation, returning a Handle which can be
 --- used to stop the effect.
 ---
---- @overload fun(location: Vector, rotation: Rotation, effect: EffectAsset, attached: boolean): Handle
+--- @overload fun(location: Vector, rotation: Rotation, effect: EffectAsset, attached: boolean): EffectHandle
 --- @param  location  Vector
 --- @param  rotation  Rotation
 --- @param  effect    EffectAsset
---- @return Handle
+--- @return EffectHandle
 ----
 function entity:PlayEffectAtLocation(location, rotation, effect)
 	return nil
 end
 
 ----
---- @param  effectHandle  Handle
+--- @param  handle  EffectHandle
 --- @return void
 ----
-function entity:StopEffect(effectHandle)
+function entity:StopEffect(handle)
 end
 
 ----
@@ -313,7 +331,7 @@ end
 ---
 --- Server Only
 ---
---- @overload fun(characterToAttachTo: Character, socketName: string): void
+--- @overload fun(characterToAttachTo: Character, socketName: SocketName): void
 --- @param  entityToAttachTo  Entity
 --- @return void
 ----
@@ -382,7 +400,7 @@ end
 --- If called on the server do it only on the server, if called on a client do it only on that client.
 ---
 --- @param  eventName  string
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function entity:SendToScripts(eventName, ...)
@@ -395,7 +413,7 @@ end
 --- Server Only
 ---
 --- @param  eventName  string
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function entity:SendToAllClients(eventName, ...)
@@ -407,7 +425,7 @@ end
 --- Local Only
 ---
 --- @param  eventName  string
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function entity:SendToServer(eventName, ...)
@@ -420,7 +438,7 @@ end
 --- Server Only
 ---
 --- @param  eventName  string
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function entity:SendToLocal(eventName, ...)
@@ -474,11 +492,11 @@ end
 ---
 --- Most often used where multiple scripts are used to simulate an array of structures.
 ---
---- @overload fun(templateRefScript: ScriptAsset): Script<Entity>[]
---- @overload fun(scriptName: string, recursive: boolean): Script<Entity>[]
---- @overload fun(templateRefScript: ScriptAsset, recursive: boolean): Script<Entity>[]
+--- @overload fun(templateRefScript: ScriptAsset): Script<self>[]
+--- @overload fun(scriptName: string, recursive: boolean): Script<self>[]
+--- @overload fun(templateRefScript: ScriptAsset, recursive: boolean): Script<self>[]
 --- @param  scriptName  string
---- @return Script<Entity>[]
+--- @return Script<self>[]
 ----
 function entity:FindAllScripts(scriptName)
 	return {}
@@ -530,7 +548,7 @@ end
 --- previous key and this one, from EaseIn, EaseOut, EaseInOut, Linear (default) The easing types can
 --- also be set per axis, this is described in one of the examples.
 ---
---- @vararg any
+--- @vararg any|nil
 --- @return number
 ----
 function entity:PlayTimeline(...)
@@ -542,7 +560,7 @@ end
 ---
 --- See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.
 ---
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function entity:PlayTimelineLoop(...)
@@ -553,7 +571,7 @@ end
 ---
 --- See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.
 ---
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function entity:PlayTimelinePingPong(...)
@@ -564,7 +582,7 @@ end
 ---
 --- See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.
 ---
---- @vararg any
+--- @vararg any|nil
 --- @return number
 ----
 function entity:PlayRelativeTimeline(...)
@@ -576,7 +594,7 @@ end
 ---
 --- See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.
 ---
---- @vararg any
+--- @vararg any|nil
 --- @return number
 ----
 function entity:PlayRelativeTimelineLoop(...)
@@ -588,7 +606,7 @@ end
 ---
 --- See the documentation in the main [PlayTimeline](#Function_PlayTimeline) function.
 ---
---- @vararg any
+--- @vararg any|nil
 --- @return number
 ----
 function entity:PlayRelativeTimelinePingPong(...)

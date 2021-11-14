@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------------------------------
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class Analytics
 --------------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ end
 --- defined as a match. Returns a handle that can be passed to MatchEnded to define the match start and
 --- end. (Note: Currently specific telemetry analytics are not available to creators)
 ---
---- @return Handle
+--- @return AnalyticsHandle
 ----
 function Analytics.MatchStarted()
 	return nil
@@ -39,8 +39,8 @@ end
 ---
 --- (Note: Currently specific telemetry analytics are not available to creators)
 ---
---- @overload fun(matchHandle: Handle, userEntriesTable: table): void
---- @param  matchHandle  Handle
+--- @overload fun(matchHandle: AnalyticsHandle, userEntriesTable: table): void
+--- @param  matchHandle  AnalyticsHandle
 --- @return void
 ----
 function Analytics.MatchEnded(matchHandle)

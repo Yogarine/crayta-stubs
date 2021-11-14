@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------------------------------
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class Event
 --- @field public tostring string 
@@ -9,7 +9,7 @@ local eventProperty = {}
 Event = eventProperty
 
 ----
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function eventProperty:Send(...)

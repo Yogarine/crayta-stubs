@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------------------------------
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class Text
 --- @field public tostring string @Note: tostring() will lose any non-ASCII characters from the local
@@ -17,7 +17,7 @@ Text = format
 --- translations are available, if run on the server it will use the native language of each Text value.
 --- (Note: Currently entering localised text into text properties is not supported by the editor)
 ---
---- @vararg any
+--- @vararg any|nil
 --- @return Text
 ----
 function format:Format(...)
@@ -32,7 +32,7 @@ end
 --- (Note: Currently entering localised text into text properties is not supported by the editor)
 ---
 --- @param  format  string
---- @vararg any
+--- @vararg any|nil
 --- @return Text
 ----
 function Text.Format(format, ...)

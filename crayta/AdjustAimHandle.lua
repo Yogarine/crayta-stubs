@@ -2,10 +2,22 @@
 --- @generated GENERATED CODE! DO NOT EDIT!
 --- @version 0.d5.9.111485
 ---
---- @shape PropertyArray<T>
---- @field public [number]    T @Get the value of an array element
---- @field public length number @Get the length of the array
+--- @class AdjustAimHandle
 --------------------------------------------------------------------------------------------------------
-local PropertyArray = {}
+local handle = {}
+AdjustAimHandle = handle
 
-return PropertyArray
+----
+--- @return void
+----
+function handle:Cancel()
+end
+
+----
+--- @return boolean
+----
+function handle:IsActive()
+	return nil
+end
+
+return handle

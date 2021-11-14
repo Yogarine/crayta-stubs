@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------------------------------
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class Globals
 --------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ end
 --- Standard print function (same as Print), takes a comma separated list of arguments and prints out
 --- their string representation.
 ---
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function print(...)
@@ -41,7 +41,7 @@ end
 --- Standard print function (same as print), takes a comma separated list of arguments and prints out
 --- their string representation.
 ---
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function Print(...)
@@ -52,7 +52,7 @@ end
 --- the second etc (same as Printf).
 ---
 --- @param  format  string
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function printf(format, ...)
@@ -63,7 +63,7 @@ end
 --- the second etc (same as printf).
 ---
 --- @param  format  string
---- @vararg any
+--- @vararg any|nil
 --- @return void
 ----
 function Printf(format, ...)
@@ -73,7 +73,7 @@ end
 --- Format a string using either {1}, {2} as in Printf, etc or using named variables.
 ---
 --- @param  format  string
---- @vararg any
+--- @vararg any|nil
 --- @return string
 ----
 function FormatString(format, ...)

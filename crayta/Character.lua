@@ -8,12 +8,22 @@
 --- Character type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class Character : Entity
 --- @field public speedMultiplier              number @Multiplier on movement speed (default is 1.0)
 --- @field public jumpHeightMultiplier         number @Multiplier on jump height (default is 1.0)
 --- @field public canSprint                   boolean @Turn on or off ability to sprint
+--- @field public canRun                      boolean @Turn on or off ability to run
+--- @field public canWalk                     boolean @Turn on or off ability to walk
+--- @field public canMantle                   boolean @Turn on or off ability to mantle
+--- @field public maxMantleHeight              number @Set the maximum height that a player can mantle
+--- @field public canSlide                    boolean @Turn on or off ability to slide
+--- @field public canRoll                     boolean @Turn on or off ability to roll
+--- @field public canRelax                    boolean @Turn on or off ability to go into a grip's
+---                                                   relaxed pose
+--- @field public breakFall                   boolean @Turn on or off ability to break fall on landing
+--- @field public breakFallSpeed               number @Turn on or off ability to break fall on landing
 --- @field public canJump                     boolean @Turn on or off ability to jump
 --- @field public displayDefaultNameTag       boolean @Turn on or off the default name tag
 --- @field public displayDefaultQuickChat     boolean @Turn on or off the default overhead quick chat
@@ -39,6 +49,8 @@
 --- @field public cameraPitch                  number @Set the orbit camera's pitch
 --- @field public cameraYaw                    number @Set the orbit camera's yaw
 --- @field public cameraLock                  boolean @Lock/Unlock the orbit camera
+--- @field public cameraSecondaryAction        number @Set what the secondary action does in the orbit
+---                                                   camera
 --- @field public cameraCollisionEnabled      boolean @Enable/Disable the camera's collision
 --- @field public damageEnabled               boolean @Turn on or off damage (ie calling of entry point
 ---                                                   OnDamaged).
@@ -53,7 +65,7 @@ Character = character
 --- Server Only
 ---
 --- @param  entityToAttach  Entity
---- @param  socketName      string
+--- @param  socketName      SocketName
 --- @return void
 ----
 function character:Attach(entityToAttach, socketName)
@@ -247,6 +259,28 @@ end
 --- @return void
 ----
 function character:PlayManualVibration(intensity, duration, affectSmallMotors, affectLargeMotors)
+end
+
+----
+--- @vararg any|nil
+--- @return AdjustAimHandle
+----
+function character:AdjustAim(...)
+	return nil
+end
+
+----
+--- @param  handle  AdjustAimHandle
+--- @return void
+----
+function character:CancelAdjustAim(handle)
+end
+
+----
+--- @return boolean
+----
+function character:IsAdjustAimActive()
+	return nil
 end
 
 return character

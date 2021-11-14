@@ -7,7 +7,7 @@
 --- do entity:IsA(User) to see if a particular entity variable is a User type entity.
 ---
 --- @generated GENERATED CODE! DO NOT EDIT!
---- @version 0.7.619.108548
+--- @version 0.d5.9.111485
 ---
 --- @class User : Entity
 --- @field public showDefaultCrosshair boolean @Show the default crosshair
@@ -172,6 +172,42 @@ function user:GoToWorld(worldAsset)
 end
 
 ----
+--- Server Only, Local Only
+---
+--- @return void
+----
+function user:OpenStore()
+end
+
+----
+--- Server Only, Local Only
+---
+--- @return void
+----
+function user:OpenNews()
+end
+
+----
+--- Server Only, Local Only
+---
+--- @overload fun(): void
+--- @param  helpPageId  string
+--- @return void
+----
+function user:OpenGameHelp(helpPageId)
+end
+
+----
+--- Server Only, Local Only
+---
+--- @overload fun(): void
+--- @param  controlSchemeId  string
+--- @return void
+----
+function user:OpenGameControls(controlSchemeId)
+end
+
+----
 --- Turn the cursor on or off
 ---
 --- @param  showCursor  boolean
@@ -181,8 +217,8 @@ function user:ShowCursor(showCursor)
 end
 
 ----
---- Converts a position in world space to a screen space co-ordinate Returned values are in the range 0
---- to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) 	local user =
+--- Converts a position in world space to a screen space co-ordinate Returned on-screen values are in
+--- the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) 	local user =
 --- self:GetEntity():GetUser() 	local screenPos = user:ProjectPositionToScreen(Vector.New(0,0,0))
 --- 	Printf("Screen pos: {1}", screenPos) end
 ---
@@ -192,6 +228,22 @@ end
 --- @return Vector2D
 ----
 function user:ProjectPositionToScreen(worldLocation)
+	return nil
+end
+
+----
+--- Converts a position in world space to a widget space co-ordinate Returned on-screen values are in
+--- the range 0 to 1  Usage example: function MyPlayerScript:LocalOnTick(deltaTime) 	local user =
+--- self:GetEntity():GetUser()  local widget = self:GetEntity().widget 	local screenPos =
+--- user:ProjectPositionToWidget(widget, Vector.New(0,0,0)) 	Printf("Screen pos: {1}", screenPos) end
+---
+--- Local Only
+---
+--- @param  widget         Widget
+--- @param  worldLocation  Vector
+--- @return Vector2D
+----
+function user:ProjectPositionToWidget(widget, worldLocation)
 	return nil
 end
 
@@ -210,6 +262,17 @@ end
 --- @return void
 ----
 function user:PlayManualVibration(intensity, duration, affectSmallMotors, affectLargeMotors)
+end
+
+----
+--- Play a camera shake effect on this User with a scale multiplier
+---
+--- @overload fun(cameraShake: CameraShakeAsset): void
+--- @param  cameraShake  CameraShakeAsset
+--- @param  scale        number
+--- @return void
+----
+function user:PlayCameraShakeEffect(cameraShake, scale)
 end
 
 ----
